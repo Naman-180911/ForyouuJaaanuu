@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- FontAwesome for romantic icons -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -27,7 +26,7 @@
       font-family: 'Playfair Display', serif;
     }
     
-    /* Elegant Custom Scrollbar */
+    /* Scrollbar Styling */
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -42,7 +41,7 @@
       background: #f43f5e;
     }
 
-    /* Envelope Opening Animation Keyframes */
+    /* Envelope Opening Animation */
     .envelope-wrapper {
       perspective: 1000px;
     }
@@ -97,12 +96,8 @@
         transform: translateY(105vh) scale(0.3) rotate(0deg);
         opacity: 0;
       }
-      10% {
-        opacity: 0.8;
-      }
-      90% {
-        opacity: 0.8;
-      }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
       100% {
         transform: translateY(-10vh) scale(1.2) rotate(360deg);
         opacity: 0;
@@ -127,13 +122,13 @@
 </head>
 <body class="min-h-screen text-slate-800 flex flex-col items-center">
 
-  <!-- HTML5 Audio Element targeting 'Ok Jaanu Title Track' -->
-  <audio id="bgMusic" src="ok_jaanu_title_track.mp3" loop></audio>
+  <!-- Streamable Direct Link for Ok Jaanu Title Track from Archive Org -->
+  <audio id="bgMusic" src="https://archive.org/download/01.OkJaanuTitleTrack/01.%20Ok%20Jaanu%20-%20Title%20Track.mp3" loop></audio>
 
   <!-- Interactive Floating Hearts Canvas Background -->
   <canvas id="heartCanvas" class="fixed inset-0 pointer-events-none z-10"></canvas>
 
-  <!-- Ambient Audio Controls for the custom song -->
+  <!-- Music Controls Button -->
   <div class="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-2 rounded-full shadow-lg border border-rose-100">
     <button id="musicToggle" class="w-9 h-9 rounded-full bg-rose-500 text-white flex items-center justify-center hover:bg-rose-600 transition-colors focus:outline-none">
       <i class="fa-solid fa-music"></i>
@@ -141,22 +136,14 @@
     <span class="text-xs font-medium text-rose-700 select-none pr-1" id="musicStatus">Play Title Track</span>
   </div>
 
-  <!-- CONTROL PANEL TOGGLE (Only visible to Sattuu to customize!) -->
-  <div class="fixed top-4 left-4 z-50">
-    <button id="toggleConfig" class="bg-rose-100/90 text-rose-700 hover:bg-rose-200 backdrop-blur px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-md border border-rose-200 transition-all">
-      <i class="fa-solid fa-cog animate-spin" style="animation-duration: 6s;"></i> Sattuu's Controls
-    </button>
-  </div>
-
   <!-- INTRO: THE MAGIC ENVELOPE SCREEN -->
   <div id="introScreen" class="fixed inset-0 bg-gradient-to-br from-rose-100 via-pink-50 to-rose-200 flex flex-col items-center justify-center z-40 px-4 transition-all duration-1000">
-    <div class="text-center mb-8 max-w-md animate-fade-in">
+    <div class="text-center mb-8 max-w-md">
       <h1 class="font-romantic text-5xl sm:text-6xl text-rose-600 mb-2">My Dearest Jaanuu</h1>
-      <p class="text-sm text-rose-700 tracking-wide font-medium uppercase">You have received a highly confidential & cute letter</p>
       <p class="text-xs text-rose-400 mt-1 italic">Click the golden wax seal to unlock the heart of your Sattuu</p>
     </div>
 
-    <!-- Envelope -->
+    <!-- Envelope Container -->
     <div class="envelope-wrapper relative flex items-center justify-center w-80 sm:w-[320px] h-52 sm:h-56 mt-4">
       <div id="mainEnvelope" class="envelope w-full h-full rounded-b-xl flex items-center justify-center cursor-pointer">
         <div id="envelopeLid" class="lid"></div>
@@ -166,12 +153,10 @@
           <i class="fa-solid fa-heart text-2xl text-rose-600 drop-shadow"></i>
         </button>
 
-        <!-- Decorative elements inside the closed letter -->
-        <div class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-rose-600/20 to-transparent pointer-events-none rounded-b-xl"></div>
-        <div class="absolute bottom-4 left-4 text-white/40 text-xs font-romantic text-lg font-bold">For Jaanuu</div>
-        <div class="absolute bottom-4 right-4 text-white/40 text-xs font-romantic text-lg font-bold">From Sattuu</div>
+        <div class="absolute bottom-4 left-4 text-white/40 font-romantic text-lg font-bold">For Jaanuu</div>
+        <div class="absolute bottom-4 right-4 text-white/40 font-romantic text-lg font-bold">From Sattuu</div>
 
-        <!-- Hidden letter page that slides out slightly first -->
+        <!-- Mini letter inside envelope -->
         <div id="miniLetter" class="letter-paper w-[90%] h-[85%] bg-stone-50 rounded-md shadow-inner flex flex-col p-4 justify-between select-none">
           <div class="border-b border-rose-100 pb-1 text-center">
             <span class="font-romantic text-rose-600 text-xl font-bold">Unfolding Love...</span>
@@ -179,39 +164,19 @@
           <div class="space-y-1.5 flex-1 py-2">
             <div class="h-1.5 bg-rose-200/50 rounded w-5/6"></div>
             <div class="h-1.5 bg-rose-200/50 rounded w-full"></div>
-            <div class="h-1.5 bg-rose-200/50 rounded w-4/6"></div>
-          </div>
-          <div class="flex justify-between items-center text-[9px] text-rose-400">
-            <span>Always Yours</span>
-            <span>💖</span>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="mt-16 text-rose-400 text-xs flex items-center gap-1">
-      <i class="fa-solid fa-lock"></i> Secured with pure endless romance
-    </div>
   </div>
 
 
-  <!-- MAIN ROMANTIC CONTENT PAGE (Initially blurred / hidden) -->
+  <!-- MAIN CONTENT PAGE (Revealed smoothly after open) -->
   <main id="mainContent" class="opacity-0 filter blur-lg transition-all duration-1000 max-w-4xl w-full px-4 pt-16 pb-24 space-y-16 pointer-events-none">
     
-    <!-- Hero / Header Portrait Section -->
+    <!-- Hero Title -->
     <header class="text-center relative">
-      <div class="inline-block relative">
-        <!-- Floating Rose Petals around hero -->
-        <div class="absolute -top-6 -left-6 text-rose-400 text-2xl animate-bounce" style="animation-duration: 3s;"><i class="fa-solid fa-seedling"></i></div>
-        <div class="absolute -bottom-6 -right-6 text-rose-400 text-2xl animate-bounce" style="animation-duration: 4s;"><i class="fa-solid fa-heart"></i></div>
-        
-        <h2 id="heroRomanticHeader" class="font-romantic text-6xl sm:text-7xl text-rose-600 leading-none drop-shadow-sm">To My Dearest Jaanuu</h2>
-      </div>
-      <p id="heroSubHeader" class="font-serif-elegant italic text-lg sm:text-xl text-stone-600 mt-4 max-w-lg mx-auto">
-        "You are the rhythm of my heart, the quiet in my chaos, and the sweetness in my everyday."
-      </p>
-      
-      <!-- Visual Divider -->
+      <h2 class="font-romantic text-6xl sm:text-7xl text-rose-600 leading-none drop-shadow-sm">To My Dearest Jaanuu</h2>
       <div class="flex items-center justify-center gap-4 mt-6">
         <span class="h-[1px] w-12 bg-rose-200"></span>
         <i class="fa-solid fa-heart text-rose-400 text-sm animate-pulse"></i>
@@ -219,23 +184,12 @@
       </div>
     </header>
 
-    <!-- ROMANTIC LOVE LETTER SECTION -->
+    <!-- LOVE LETTER SECTION -->
     <section class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-rose-100/50 relative overflow-hidden">
-      <!-- Decorative vintage corners -->
-      <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-rose-200/50 rounded-tl-3xl m-2"></div>
-      <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-rose-200/50 rounded-tr-3xl m-2"></div>
-      <div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-rose-200/50 rounded-bl-3xl m-2"></div>
-      <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-rose-200/50 rounded-br-3xl m-2"></div>
-
-      <!-- Watermark background heart -->
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
-        <i class="fa-solid fa-heart text-[400px] text-rose-600"></i>
-      </div>
-
       <div class="prose max-w-none text-stone-700 leading-relaxed font-serif-elegant space-y-6 relative z-10 text-base sm:text-lg">
-        <p class="font-bold text-rose-600 font-romantic text-3xl font-bold">My Beautiful Jaanuu,</p>
+        <p class="font-bold text-rose-600 font-romantic text-3xl">My Beautiful Jaanuu,</p>
         
-        <div id="loveLetterBody" class="whitespace-pre-line space-y-4 font-serif-elegant">Hyyyyy Jaaanuuuu, I Love youuu idk amaa su lakhuuu ik khaali lavaraa j laikha hase and me english gujarati mix ma lakhaa yk khaali english ma bov serious laage.. alsoo me aa letter lakhvanoj hato pan tame pehla aapi didhoo and pachhi mane puichu k me kyare aapvanoo😭😭 jenathi have evu laagse k tame kidhu etle me laikhoo..
+        <div class="whitespace-pre-line space-y-4 font-serif-elegant">Hyyyyy Jaaanuuuu, I Love youuu idk amaa su lakhuuu ik khaali lavaraa j laikha hase and me english gujarati mix ma lakhaa yk khaali english ma bov serious laage.. alsoo me aa letter lakhvanoj hato pan tame pehla aapi didhoo and pachhi mane puichu k me kyare aapvanoo😭😭 jenathi have evu laagse k tame kidhu etle me laikhoo..
 
 Hmm so idk from where to startt i justt Love youu forever i could not express it in my words but still when i wake up the first thing i check on my phone is your messagess and lovely reels you could not even imagine how happyy i wass when you said I love youuu tooh for the first timeee that was my best moment for sureee i was sooo soooo sooooooo happyy that i would even do anything for youu ya but homework and assignments would still be so out of my league 😜😜 sorry jaanuu 
 
@@ -245,536 +199,82 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
 
         <div class="pt-8 flex flex-col items-end">
           <p class="text-sm text-stone-400 not-italic">Forever & always yours,</p>
-          <p class="font-romantic text-4xl text-rose-600 font-bold mt-1" id="signatureName">Your Sattuu</p>
+          <p class="font-romantic text-4xl text-rose-600 font-bold mt-1">Your Sattuu</p>
         </div>
       </div>
     </section>
 
-    <!-- PHOTO GALLERY SECTION WITH GITHUB IMAGES -->
+    <!-- PHOTO GALLERY SECTION -->
     <section class="space-y-6">
       <div class="text-center">
         <h3 class="font-serif-elegant text-2xl sm:text-3xl text-stone-800 font-bold">Our Captured Moments</h3>
-        <p class="text-sm text-rose-500 font-medium">Add these beautiful images to your GitHub repository to see them instantly!</p>
       </div>
 
-      <!-- Grid of Memories -->
+      <!-- Grid Layout -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         
         <!-- Image Card 1 -->
-        <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(1)">
+        <div class="bg-white p-4 rounded-xl shadow-md border border-rose-100 transition-all duration-300">
+          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
             <img id="galleryImg1" src="20260620_205705(1).heic" class="w-full h-full object-cover rounded-lg" alt="Memory 1" onerror="handleImageLoadError(1)">
             <div id="galleryPlaceholder1" class="hidden text-center p-4 absolute inset-0 flex flex-col items-center justify-center bg-rose-50">
-              <i class="fa-solid fa-camera-retro text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
-              <p class="text-xs text-rose-500 font-semibold">Image loading or needs upload...</p>
-              <p class="text-[9px] text-stone-400 mt-1 font-mono">Filename: 20260620_205705(1).heic</p>
-            </div>
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
-              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Replacement</span>
+              <i class="fa-solid fa-camera-retro text-4xl text-rose-300 mb-2"></i>
+              <p class="text-xs text-rose-500 font-semibold">Image loading or file missing...</p>
+              <p class="text-[9px] text-stone-400 mt-1 font-mono">20260620_205705(1).heic</p>
             </div>
           </div>
-          <input type="file" id="imageInput1" accept="image/*" class="hidden" onchange="handleImageFile(this, 1)">
           <div class="mt-3 text-center">
-            <p id="imageCap1" class="text-sm font-semibold text-stone-700 font-serif-elegant">Our first picture togetherr</p>
-            <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
+            <p class="text-sm font-semibold text-stone-700 font-serif-elegant">Our first picture togetherr</p>
           </div>
         </div>
 
         <!-- Image Card 2 -->
-        <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(2)">
+        <div class="bg-white p-4 rounded-xl shadow-md border border-rose-100 transition-all duration-300">
+          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
             <img id="galleryImg2" src="IMG20260623204630.jpg" class="w-full h-full object-cover rounded-lg" alt="Memory 2" onerror="handleImageLoadError(2)">
             <div id="galleryPlaceholder2" class="hidden text-center p-4 absolute inset-0 flex flex-col items-center justify-center bg-rose-50">
-              <i class="fa-solid fa-heart text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
-              <p class="text-xs text-rose-500 font-semibold">Image loading or needs upload...</p>
-              <p class="text-[9px] text-stone-400 mt-1 font-mono">Filename: IMG20260623204630.jpg</p>
-            </div>
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
-              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Replacement</span>
+              <i class="fa-solid fa-heart text-4xl text-rose-300 mb-2"></i>
+              <p class="text-xs text-rose-500 font-semibold">Image loading or file missing...</p>
+              <p class="text-[9px] text-stone-400 mt-1 font-mono">IMG20260623204630.jpg</p>
             </div>
           </div>
-          <input type="file" id="imageInput2" accept="image/*" class="hidden" onchange="handleImageFile(this, 2)">
           <div class="mt-3 text-center">
-            <p id="imageCap2" class="text-sm font-semibold text-stone-700 font-serif-elegant leading-snug">The picture in which jaaanuu is the cutest among the whole universe</p>
-            <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
+            <p class="text-sm font-semibold text-stone-700 font-serif-elegant leading-snug">The picture in which jaaanuu is the cutest among the whole universe</p>
           </div>
         </div>
 
         <!-- Image Card 3 -->
-        <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(3)">
+        <div class="bg-white p-4 rounded-xl shadow-md border border-rose-100 transition-all duration-300">
+          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
             <img id="galleryImg3" src="20260625 195743.heic" class="w-full h-full object-cover rounded-lg" alt="Memory 3" onerror="handleImageLoadError(3)">
             <div id="galleryPlaceholder3" class="hidden text-center p-4 absolute inset-0 flex flex-col items-center justify-center bg-rose-50">
-              <i class="fa-solid fa-wand-magic-sparkles text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
-              <p class="text-xs text-rose-500 font-semibold">Image loading or needs upload...</p>
-              <p class="text-[9px] text-stone-400 mt-1 font-mono">Filename: 20260625 195743.heic</p>
-            </div>
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
-              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Replacement</span>
+              <i class="fa-solid fa-wand-magic-sparkles text-4xl text-rose-300 mb-2"></i>
+              <p class="text-xs text-rose-500 font-semibold">Image loading or file missing...</p>
+              <p class="text-[9px] text-stone-400 mt-1 font-mono">20260625 195743.heic</p>
             </div>
           </div>
-          <input type="file" id="imageInput3" accept="image/*" class="hidden" onchange="handleImageFile(this, 3)">
           <div class="mt-3 text-center">
-            <p id="imageCap3" class="text-sm font-semibold text-stone-700 font-serif-elegant leading-snug">Picture in which you placed your hand on my shoulderr🤒🥴</p>
-            <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
+            <p class="text-sm font-semibold text-stone-700 font-serif-elegant leading-snug">Picture in which you placed your hand on my shoulderr🤒🥴</p>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- OUR ROMANTIC LOVE TIMELINE -->
-    <section class="space-y-8">
-      <div class="text-center">
-        <h3 class="font-serif-elegant text-2xl sm:text-3xl text-stone-800 font-bold">Our Sweet Journey</h3>
-        <p class="text-sm text-rose-500 font-medium">Small beautiful milestones of our endless story</p>
-      </div>
-
-      <div class="relative border-l-2 border-rose-200 ml-4 md:ml-32 space-y-12">
-        
-        <!-- Timeline Item 1 -->
-        <div class="relative pl-8">
-          <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-rose-400 border-4 border-white shadow-sm flex items-center justify-center"></div>
-          <div>
-            <span id="timelineDate1" class="text-xs font-bold text-rose-500 tracking-wider uppercase font-mono">The Beautiful Beginning</span>
-            <h4 id="timelineTitle1" class="text-lg font-bold text-stone-800 font-serif-elegant mt-1">Our Eyes Met & The World Paused</h4>
-            <p id="timelineDesc1" class="text-sm text-stone-600 mt-2">The magical day when fate aligned and we finally got to talk. Little did I know that day, my whole universe was about to change for the better.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 2 -->
-        <div class="relative pl-8">
-          <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-rose-400 border-4 border-white shadow-sm flex items-center justify-center"></div>
-          <div>
-            <span id="timelineDate2" class="text-xs font-bold text-rose-500 tracking-wider uppercase font-mono">My Favorite Name</span>
-            <h4 id="timelineTitle2" class="text-lg font-bold text-stone-800 font-serif-elegant mt-1">When You Called Me "Sattuu"</h4>
-            <p id="timelineDesc2" class="text-sm text-stone-600 mt-2">The sweetest syllable to ever leave your lips. The moment you called me Sattuu, it instantly became more than just a name—it became our love code.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 3 -->
-        <div class="relative pl-8">
-          <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-rose-400 border-4 border-white shadow-sm flex items-center justify-center"></div>
-          <div>
-            <span id="timelineDate3" class="text-xs font-bold text-rose-500 tracking-wider uppercase font-mono">Today & Forever</span>
-            <h4 id="timelineTitle3" class="text-lg font-bold text-stone-800 font-serif-elegant mt-1">Loving You More Every Single Day</h4>
-            <p id="timelineDesc3" class="text-sm text-stone-600 mt-2">Every sunrise brings new reasons to fall deeper in love with you. No matter where life takes us, I promise to always keep you safe and smiling in my heart.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- INTERACTIVE LOVE-JAR & SLIDER -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      
-      <!-- Interactive Love Jar of Compliments -->
-      <div class="bg-rose-50/50 rounded-2xl p-6 border border-rose-100 flex flex-col items-center justify-between text-center min-h-[300px]">
-        <div>
-          <span class="text-rose-500 text-3xl"><i class="fa-solid fa-cookie-bite"></i></span>
-          <h4 class="font-serif-elegant text-xl font-bold text-stone-800 mt-2">Jaanuu's Sweet Jar</h4>
-          <p class="text-xs text-stone-500 mt-1">Tap the heart jar to pull out a sweet reason why Sattuu loves you!</p>
-        </div>
-
-        <!-- Visual Love Jar Animation -->
-        <div id="jarButton" class="relative cursor-pointer transition-transform transform active:scale-95 duration-200 my-4 group">
-          <!-- Jar Container -->
-          <div class="w-24 h-28 border-4 border-rose-300 rounded-2xl rounded-t-lg bg-white/70 shadow-lg relative flex items-center justify-center">
-            <!-- Jar Lid -->
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-rose-400 rounded-full border-b-2 border-rose-500"></div>
-            <!-- Jar label -->
-            <div class="bg-rose-100 border border-rose-200 px-2 py-1 rounded text-[10px] font-bold text-rose-600 uppercase tracking-widest pointer-events-none">
-              LOVE NOTES
-            </div>
-            <!-- Dynamic Floating Hearts inside Jar -->
-            <div class="absolute bottom-2 inset-x-2 flex justify-around opacity-70 group-hover:animate-bounce">
-              <i class="fa-solid fa-heart text-xs text-rose-400"></i>
-              <i class="fa-solid fa-heart text-sm text-rose-500"></i>
-              <i class="fa-solid fa-heart text-xs text-rose-300"></i>
-            </div>
-          </div>
-        </div>
-
-        <div id="complimentBox" class="min-h-[50px] flex items-center justify-center px-4">
-          <p class="text-sm font-serif-elegant italic text-rose-700 bg-white px-4 py-2 rounded-lg border border-rose-100 shadow-sm" id="complimentText">
-            "Click the jar to read my heart..."
-          </p>
-        </div>
-      </div>
-
-      <!-- Love Slider Scale -->
-      <div class="bg-rose-50/50 rounded-2xl p-6 border border-rose-100 flex flex-col items-center justify-between text-center min-h-[300px]">
-        <div>
-          <span class="text-rose-500 text-3xl"><i class="fa-solid fa-scale-unbalanced-rebuild"></i></span>
-          <h4 class="font-serif-elegant text-xl font-bold text-stone-800 mt-2">Sattuu's Love-O-Meter</h4>
-          <p class="text-xs text-stone-500 mt-1">Drag the handle to see exactly how much your Sattuu loves you!</p>
-        </div>
-
-        <div class="w-full px-6 my-6">
-          <input type="range" id="loveMeter" min="1" max="10" value="5" class="w-full accent-rose-500 cursor-pointer h-2 bg-rose-200 rounded-lg appearance-none">
-          <div class="flex justify-between text-[10px] text-stone-400 font-mono mt-2">
-            <span>A LOT</span>
-            <span>INFINITE</span>
-          </div>
-        </div>
-
-        <div class="w-full">
-          <div class="bg-white px-6 py-4 rounded-xl border border-rose-100 shadow-sm min-h-[70px] flex flex-col justify-center items-center">
-            <p id="meterMessage" class="text-sm font-semibold text-rose-600 font-serif-elegant">"More than the stars in the night sky."</p>
-            <p id="meterPercent" class="text-xs text-stone-400 mt-1 font-mono">Loving Capacity: 10,000%</p>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- CALL TO ACTION / EXPORTER NOTE -->
+    <!-- FOOTER -->
     <footer class="text-center space-y-4">
       <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-rose-200 to-transparent"></div>
       <p class="font-romantic text-3xl text-rose-500">Yours forever, Sattuu</p>
-      <p class="text-[10px] text-stone-400 font-mono">Made with endless cuddles, high-fidelity sweet sighs, and infinite care.</p>
     </footer>
 
   </main>
 
-
-  <!-- MODAL: SATTUU'S SETTINGS / CONFIGURATION PANEL -->
-  <div id="configPanel" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto border border-rose-100 p-6 flex flex-col">
-      <div class="flex items-center justify-between border-b pb-4 mb-4">
-        <h3 class="font-bold text-stone-800 flex items-center gap-2">
-          <i class="fa-solid fa-sliders text-rose-500"></i> Sattuu's Private Love Control
-        </h3>
-        <button id="closeConfig" class="text-stone-400 hover:text-stone-600 text-xl font-bold">&times;</button>
-      </div>
-
-      <p class="text-xs text-rose-500 bg-rose-50 p-2.5 rounded-lg mb-4">
-        Customize this page for your Jaanuu! Change the texts, titles, memories, and upload images. Once you're done, click the <strong>Export Sealed Letter</strong> button below to download your unique HTML file to send directly to her!
-      </p>
-
-      <div class="space-y-4 flex-1">
-        <!-- Main Titles Customizer -->
-        <div>
-          <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Your Jaanuu's Name</label>
-          <input type="text" id="cfgJaanuuName" class="w-full text-sm border p-2 rounded focus:outline-none focus:ring-1 focus:ring-rose-400" value="Jaanuu">
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Your Name (Signature)</label>
-          <input type="text" id="cfgSattuuName" class="w-full text-sm border p-2 rounded focus:outline-none focus:ring-1 focus:ring-rose-400" value="Sattuu">
-        </div>
-
-        <!-- Letter Body Customizer -->
-        <div>
-          <label class="block text-xs font-bold uppercase text-stone-500 mb-1">The Romantic Love Letter</label>
-          <textarea id="cfgLetterText" rows="6" class="w-full text-sm border p-2 rounded focus:outline-none focus:ring-1 focus:ring-rose-400 font-serif"></textarea>
-        </div>
-
-        <!-- Captions for Photos Customizer -->
-        <div class="space-y-2">
-          <label class="block text-xs font-bold uppercase text-stone-500">Photo Captions</label>
-          <input type="text" id="cfgCap1" class="w-full text-sm border p-2 rounded" placeholder="Caption 1">
-          <input type="text" id="cfgCap2" class="w-full text-sm border p-2 rounded" placeholder="Caption 2">
-          <input type="text" id="cfgCap3" class="w-full text-sm border p-2 rounded" placeholder="Caption 3">
-        </div>
-
-        <!-- Memory Timeline Edit Section -->
-        <div class="space-y-3">
-          <label class="block text-xs font-bold uppercase text-stone-500">Timeline Milestones</label>
-          <!-- Item 1 -->
-          <div class="p-2 border rounded bg-stone-50 space-y-1">
-            <input type="text" id="cfgTimeDate1" class="w-full text-xs border p-1 rounded font-bold" placeholder="Milestone 1 Date/Label">
-            <input type="text" id="cfgTimeTitle1" class="w-full text-xs border p-1 rounded" placeholder="Milestone 1 Title">
-            <textarea id="cfgTimeDesc1" class="w-full text-xs border p-1 rounded" rows="2" placeholder="Milestone 1 Description"></textarea>
-          </div>
-          <!-- Item 2 -->
-          <div class="p-2 border rounded bg-stone-50 space-y-1">
-            <input type="text" id="cfgTimeDate2" class="w-full text-xs border p-1 rounded font-bold" placeholder="Milestone 2 Date/Label">
-            <input type="text" id="cfgTimeTitle2" class="w-full text-xs border p-1 rounded" placeholder="Milestone 2 Title">
-            <textarea id="cfgTimeDesc2" class="w-full text-xs border p-1 rounded" rows="2" placeholder="Milestone 2 Description"></textarea>
-          </div>
-          <!-- Item 3 -->
-          <div class="p-2 border rounded bg-stone-50 space-y-1">
-            <input type="text" id="cfgTimeDate3" class="w-full text-xs border p-1 rounded font-bold" placeholder="Milestone 3 Date/Label">
-            <input type="text" id="cfgTimeTitle3" class="w-full text-xs border p-1 rounded" placeholder="Milestone 3 Title">
-            <textarea id="cfgTimeDesc3" class="w-full text-xs border p-1 rounded" rows="2" placeholder="Milestone 3 Description"></textarea>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="border-t pt-4 mt-6 flex flex-col gap-2">
-        <button id="saveConfig" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
-          <i class="fa-solid fa-circle-check"></i> Apply to Current View
-        </button>
-        <button id="exportHtml" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow">
-          <i class="fa-solid fa-file-arrow-down animate-bounce"></i> Export Sealed Letter (.html)
-        </button>
-        <p class="text-[10px] text-stone-400 text-center mt-1">Exporting downloads a clean, customized copy containing your base64 images and written texts that works forever on any phone or computer offline!</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Dynamic Feedback Notification Box -->
-  <div id="toastNotification" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-rose-600 text-white px-4 py-2 rounded-full shadow-lg text-xs font-semibold tracking-wider flex items-center gap-2 transition-all duration-300 transform translate-y-12 opacity-0 pointer-events-none">
-    <i class="fa-solid fa-heart animate-ping"></i> <span id="toastMessage">Loved Applied!</span>
-  </div>
-
-
-  <!-- SCRIPTS & APPLICATION LOGIC -->
   <script>
-    // --- APP STATE & LOCALSTORAGE ---
-    // Persistent love state for continuing active editing sessions
-    const state = {
-      jaanuuName: localStorage.getItem('romantic_jaanuu') || 'Jaanuu',
-      sattuuName: localStorage.getItem('romantic_sattuu') || 'Sattuu',
-      letterText: localStorage.getItem('romantic_letter') || `Hyyyyy Jaaanuuuu, I Love youuu idk amaa su lakhuuu ik khaali lavaraa j laikha hase and me english gujarati mix ma lakhaa yk khaali english ma bov serious laage.. alsoo me aa letter lakhvanoj hato pan tame pehla aapi didhoo and pachhi mane puichu k me kyare aapvanoo😭😭 jenathi have evu laagse k tame kidhu etle me laikhoo..
-
-Hmm so idk from where to startt i justt Love youu forever i could not express it in my words but still when i wake up the first thing i check on my phone is your messagess and lovely reels you could not even imagine how happyy i wass when you said I love youuu tooh for the first timeee that was my best moment for sureee i was sooo soooo sooooooo happyy that i would even do anything for youu ya but homework and assignments would still be so out of my league 😜😜 sorry jaanuu 
-
-And yess indeed me maanu k me tane joto tuition maa cuz i really liked you since thenn but when you started talkin to mee i kneww that ur the one tame mane literally change kari kaaidhoo ekdum ego valo maanas jee rude hato (sometimes still noww😭😭) and yaaaa i still smile when i remember that we use to do our who reaches first reel liking competition karta tee you were my greatest opponent aapde te haji bhi karvu joye actuallyy that would be funn and nostalgicc
-
-Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni baar jatuj rayeluu che 😂🤣 bijo focus ama graphics ma aapuuu okk jaaanuuu i love youuu khajuriii tamari sugandh mara ma felavya karjoo💓💕`,
-      cap1: localStorage.getItem('romantic_cap1') || 'Our first picture togetherr',
-      cap2: localStorage.getItem('romantic_cap2') || 'The picture in which jaaanuu is the cutest among the whole universe',
-      cap3: localStorage.getItem('romantic_cap3') || 'Picture in which you placed your hand on my shoulderr🤒🥴',
-      timeDate1: localStorage.getItem('romantic_tdate1') || 'The Beautiful Beginning',
-      timeTitle1: localStorage.getItem('romantic_ttitle1') || 'Our Eyes Met & The World Paused',
-      timeDesc1: localStorage.getItem('romantic_tdesc1') || 'The magical day when fate aligned and we finally got to talk. Little did I know that day, my whole universe was about to change for the better.',
-      timeDate2: localStorage.getItem('romantic_tdate2') || 'My Favorite Name',
-      timeTitle2: localStorage.getItem('romantic_ttitle2') || 'When You Called Me "Sattuu"',
-      timeDesc2: localStorage.getItem('romantic_tdesc2') || 'The sweetest syllable to ever leave your lips. The moment you called me Sattuu, it instantly became more than just a name—it became our love code.',
-      timeDate3: localStorage.getItem('romantic_tdate3') || 'Today & Forever',
-      timeTitle3: localStorage.getItem('romantic_ttitle3') || 'Loving You More Every Single Day',
-      timeDesc3: localStorage.getItem('romantic_tdesc3') || 'Every sunrise brings new reasons to fall deeper in love with you. No matter where life takes us, I promise to always keep you safe and smiling in my heart.',
-      imgData1: localStorage.getItem('romantic_img1') || '20260620_205705(1).heic',
-      imgData2: localStorage.getItem('romantic_img2') || 'IMG20260623204630.jpg',
-      imgData3: localStorage.getItem('romantic_img3') || '20260625 195743.heic',
-    };
-
-    // Compliments Array for Love Jar
-    const romanticCompliments = [
-      "Your laugh is my absolute favorite sound in the world.",
-      "The way your nose crinkles when you smile melts my heart entirely.",
-      "You make me feel like the luckiest person in the galaxy just by calling me Sattuu.",
-      "No matter how rough my day is, one thought of you fixes everything.",
-      "I love how safe I feel when I am holding you close.",
-      "You make even the simplest days feel like a beautiful fairytale.",
-      "Your kind heart, gentle soul, and bright intelligence inspire me daily.",
-      "I wish I could freeze time whenever you look at me.",
-      "You've shown me what true, pure, and effortless love feels like."
-    ];
-
-    // Love scale messages based on slide value
-    const loveScaleMessages = [
-      "No words exist to measure this.",
-      "More than the stars in the night sky.",
-      "Bigger than the ocean depths.",
-      "To the moon, the sun, and back a billion times.",
-      "Infinitely expanding every microsecond.",
-      "Enough to fill a trillion universes.",
-      "Past the edge of forever.",
-      "More than there are atoms in the cosmos.",
-      "Beyond all imaginable timelines.",
-      "Sattuu loves Jaanuu to absolute infinity! 💖"
-    ];
-
-    // Fallback handler if image cannot be loaded from filesystem (e.g. while testing locally)
+    // Placeholder image trigger if files are not detected yet locally or on repository
     function handleImageLoadError(index) {
-      const imgEl = document.getElementById(`galleryImg${i = index}`);
-      const placeholderEl = document.getElementById(`galleryPlaceholder${index}`);
-      
-      // If we are using the default filenames and they fail to load, display the placeholder elegantly.
-      if (state[`imgData${index}`] === '20260620_205705(1).heic' || 
-          state[`imgData${index}`] === 'IMG20260623204630.jpg' || 
-          state[`imgData${index}`] === '20260625 195743.heic' || 
-          !state[`imgData${index}`]) {
-        imgEl.classList.add('hidden');
-        placeholderEl.classList.remove('hidden');
-      }
+      document.getElementById(`galleryImg${index}`).classList.add('hidden');
+      document.getElementById(`galleryPlaceholder${index}`).classList.remove('hidden');
     }
-
-    // --- RENDER CURRENT STATE TO DOM ---
-    function renderState() {
-      // Headers
-      document.getElementById('heroRomanticHeader').innerText = `To My Dearest ${state.jaanuuName}`;
-      document.getElementById('signatureName').innerText = `Your ${state.sattuuName}`;
-      
-      // Letter Body
-      document.getElementById('loveLetterBody').innerText = state.letterText;
-
-      // Photo Gallery Image Sources
-      for (let i = 1; i <= 3; i++) {
-        const imgEl = document.getElementById(`galleryImg${i}`);
-        const placeholderEl = document.getElementById(`galleryPlaceholder${i}`);
-        const capEl = document.getElementById(`imageCap${i}`);
-
-        if (state[`imgData${i}`]) {
-          imgEl.src = state[`imgData${i}`];
-          imgEl.classList.remove('hidden');
-          placeholderEl.classList.add('hidden');
-        } else {
-          imgEl.src = "";
-          imgEl.classList.add('hidden');
-          placeholderEl.classList.remove('hidden');
-        }
-        capEl.innerText = state[`cap${i}`];
-      }
-
-      // Timeline Rendering
-      for (let i = 1; i <= 3; i++) {
-        document.getElementById(`timelineDate${i}`).innerText = state[`timeDate${i}`];
-        document.getElementById(`timelineTitle${i}`).innerText = state[`timeTitle${i}`];
-        document.getElementById(`timelineDesc${i}`).innerText = state[`timeDesc${i}`];
-      }
-
-      // Sync form control values
-      document.getElementById('cfgJaanuuName').value = state.jaanuuName;
-      document.getElementById('cfgSattuuName').value = state.sattuuName;
-      document.getElementById('cfgLetterText').value = state.letterText;
-      document.getElementById('cfgCap1').value = state.cap1;
-      document.getElementById('cfgCap2').value = state.cap2;
-      document.getElementById('cfgCap3').value = state.cap3;
-      document.getElementById('cfgTimeDate1').value = state.timeDate1;
-      document.getElementById('cfgTimeTitle1').value = state.timeTitle1;
-      document.getElementById('cfgTimeDesc1').value = state.timeDesc1;
-      document.getElementById('cfgTimeDate2').value = state.timeDate2;
-      document.getElementById('cfgTimeTitle2').value = state.timeTitle2;
-      document.getElementById('cfgTimeDesc2').value = state.timeDesc2;
-      document.getElementById('cfgTimeDate3').value = state.timeDate3;
-      document.getElementById('cfgTimeTitle3').value = state.timeTitle3;
-      document.getElementById('cfgTimeDesc3').value = state.timeDesc3;
-    }
-
-    // --- DYNAMIC PHOTO UPLOAD HELPERS ---
-    function triggerImageUpload(index) {
-      document.getElementById(`imageInput${index}`).click();
-    }
-
-    function handleImageFile(input, index) {
-      const file = input.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const base64Data = e.target.result;
-          state[`imgData${index}`] = base64Data;
-          localStorage.setItem(`romantic_img${index}`, base64Data);
-          renderState();
-          showToast("Photo updated elegantly! 📸");
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    // --- CONFIG MODAL & PERSISTENCE ---
-    const toggleConfigBtn = document.getElementById('toggleConfig');
-    const configPanel = document.getElementById('configPanel');
-    const closeConfigBtn = document.getElementById('closeConfig');
-    const saveConfigBtn = document.getElementById('saveConfig');
-    const exportHtmlBtn = document.getElementById('exportHtml');
-
-    toggleConfigBtn.addEventListener('click', () => {
-      configPanel.classList.remove('hidden');
-    });
-
-    closeConfigBtn.addEventListener('click', () => {
-      configPanel.classList.add('hidden');
-    });
-
-    saveConfigBtn.addEventListener('click', () => {
-      // Gather and update state
-      state.jaanuuName = document.getElementById('cfgJaanuuName').value || 'Jaanuu';
-      state.sattuuName = document.getElementById('cfgSattuuName').value || 'Sattuu';
-      state.letterText = document.getElementById('cfgLetterText').value;
-      state.cap1 = document.getElementById('cfgCap1').value;
-      state.cap2 = document.getElementById('cfgCap2').value;
-      state.cap3 = document.getElementById('cfgCap3').value;
-      state.timeDate1 = document.getElementById('cfgTimeDate1').value;
-      state.timeTitle1 = document.getElementById('cfgTimeTitle1').value;
-      state.timeDesc1 = document.getElementById('cfgTimeDesc1').value;
-      state.timeDate2 = document.getElementById('cfgTimeDate2').value;
-      state.timeTitle2 = document.getElementById('cfgTimeTitle2').value;
-      state.timeDesc2 = document.getElementById('cfgTimeDesc2').value;
-      state.timeDate3 = document.getElementById('cfgTimeDate3').value;
-      state.timeTitle3 = document.getElementById('cfgTimeTitle3').value;
-      state.timeDesc3 = document.getElementById('cfgTimeDesc3').value;
-
-      // Save to localStorage
-      localStorage.setItem('romantic_jaanuu', state.jaanuuName);
-      localStorage.setItem('romantic_sattuu', state.sattuuName);
-      localStorage.setItem('romantic_letter', state.letterText);
-      localStorage.setItem('romantic_cap1', state.cap1);
-      localStorage.setItem('romantic_cap2', state.cap2);
-      localStorage.setItem('romantic_cap3', state.cap3);
-      localStorage.setItem('romantic_tdate1', state.timeDate1);
-      localStorage.setItem('romantic_ttitle1', state.timeTitle1);
-      localStorage.setItem('romantic_tdesc1', state.timeDesc1);
-      localStorage.setItem('romantic_tdate2', state.timeDate2);
-      localStorage.setItem('romantic_ttitle2', state.timeTitle2);
-      localStorage.setItem('romantic_tdesc2', state.timeDesc2);
-      localStorage.setItem('romantic_tdate3', state.timeDate3);
-      localStorage.setItem('romantic_ttitle3', state.timeTitle3);
-      localStorage.setItem('romantic_tdesc3', state.timeDesc3);
-
-      renderState();
-      configPanel.classList.add('hidden');
-      showToast("Custom Love Customizations Saved! ❤️");
-    });
-
-    // --- HTML EXPORTER FUNCTIONALITY ---
-    exportHtmlBtn.addEventListener('click', () => {
-      // Create a persistent self-contained package of the letter
-      const currentHTML = document.documentElement.outerHTML;
-      
-      const bundledStateInject = `const state = {
-      jaanuuName: ${JSON.stringify(state.jaanuuName)},
-      sattuuName: ${JSON.stringify(state.sattuuName)},
-      letterText: ${JSON.stringify(state.letterText)},
-      cap1: ${JSON.stringify(state.cap1)},
-      cap2: ${JSON.stringify(state.cap2)},
-      cap3: ${JSON.stringify(state.cap3)},
-      timeDate1: ${JSON.stringify(state.timeDate1)},
-      timeTitle1: ${JSON.stringify(state.timeTitle1)},
-      timeDesc1: ${JSON.stringify(state.timeDesc1)},
-      timeDate2: ${JSON.stringify(state.timeDate2)},
-      timeTitle2: ${JSON.stringify(state.timeTitle2)},
-      timeDesc2: ${JSON.stringify(state.timeDesc2)},
-      timeDate3: ${JSON.stringify(state.timeDate3)},
-      timeTitle3: ${JSON.stringify(state.timeTitle3)},
-      timeDesc3: ${JSON.stringify(state.timeDesc3)},
-      imgData1: ${JSON.stringify(state.imgData1)},
-      imgData2: ${JSON.stringify(state.imgData2)},
-      imgData3: ${JSON.stringify(state.imgData3)},
-    };`;
-
-      // Swap out template state logic with actual bundled details
-      let editedHTML = currentHTML.replace(/const\s+state\s*=\s*\{[\s\S]*?imgData3:\s*localStorage\.getItem\('romantic_img3'\)\s*\|\|\s*''\s*,\s*\};/g, bundledStateInject);
-
-      const blob = new Blob([editedHTML], { type: 'text/html' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `Love_Letter_For_My_Jaanuu.html`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast("Download Complete! Send it to her! 💌");
-    });
-
-
-    // --- TOAST NOTIFICATIONS ---
-    function showToast(message) {
-      const toast = document.getElementById('toastNotification');
-      const msgSpan = document.getElementById('toastMessage');
-      msgSpan.innerText = message;
-      
-      toast.classList.remove('translate-y-12', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-12', 'opacity-0');
-      }, 3000);
-    }
-
 
     // --- ENVELOPE REVEAL MECHANISM ---
     const openEnvelopeBtn = document.getElementById('openEnvelopeBtn');
@@ -784,101 +284,34 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
 
     openEnvelopeBtn.addEventListener('click', (e) => {
       e.stopPropagation(); 
-      
-      // Play the song (Ok Jaanu) and tap sounds
       togglePlaySong(true);
-      playSparkleSound();
 
       mainEnvelope.classList.add('open');
       triggerHeartExplosion();
 
       setTimeout(() => {
         introScreen.classList.add('translate-y-[-120%]', 'opacity-0');
-        mainContent.classList.remove('pointer-events-none');
-        mainContent.classList.remove('opacity-0', 'blur-lg');
+        mainContent.classList.remove('pointer-events-none', 'opacity-0', 'blur-lg');
         mainContent.classList.add('opacity-100', 'blur-0');
         document.body.style.overflowY = 'auto';
-        showToast("Open with Sattuu's infinite love! ❤️");
       }, 1200);
     });
 
-
-    // --- INTERACTIVE LOVE COMPLIMENTS JAR ---
-    const jarButton = document.getElementById('jarButton');
-    const complimentText = document.getElementById('complimentText');
-
-    jarButton.addEventListener('click', () => {
-      const randomIndex = Math.floor(Math.random() * romanticCompliments.length);
-      const randomNote = romanticCompliments[randomIndex];
-      
-      complimentText.classList.add('scale-95', 'opacity-0');
-      playCuteBubbleSound();
-
-      setTimeout(() => {
-        complimentText.innerText = `"${randomNote}"`;
-        complimentText.classList.remove('scale-95', 'opacity-0');
-        complimentText.classList.add('scale-100', 'opacity-100');
-      }, 200);
-
-      for(let i=0; i<4; i++) {
-        createFloatingHeartFromElement(jarButton);
-      }
-    });
-
-    function createFloatingHeartFromElement(elem) {
-      const rect = elem.getBoundingClientRect();
-      const heart = document.createElement('div');
-      heart.className = 'text-rose-500 absolute pointer-events-none z-50 text-xl animate-ping';
-      heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
-      heart.style.left = `${rect.left + rect.width/2 + (Math.random() * 40 - 20)}px`;
-      heart.style.top = `${rect.top - 20}px`;
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 1000);
-    }
-
-
-    // --- LOVE METER CONTROLLER ---
-    const loveMeter = document.getElementById('loveMeter');
-    const meterMessage = document.getElementById('meterMessage');
-    const meterPercent = document.getElementById('meterPercent');
-
-    loveMeter.addEventListener('input', (e) => {
-      const value = parseInt(e.target.value);
-      const selectedMessage = loveScaleMessages[value - 1];
-      
-      meterMessage.innerText = `"${selectedMessage}"`;
-      
-      if (value === 10) {
-        meterPercent.innerText = "Loving Capacity: ∞% (Break the Physics!)";
-      } else {
-        meterPercent.innerText = `Loving Capacity: ${(value * 15000).toLocaleString()}%`;
-      }
-      playPitchShiftBeep(value);
-    });
-
-
-    // --- HTML5 MP3 INTEGRATION FOR 'OK JAANU TITLE TRACK' ---
+    // --- AUDIO PLAYER INTEGRATION ---
     const bgMusic = document.getElementById('bgMusic');
     const musicToggle = document.getElementById('musicToggle');
     const musicStatus = document.getElementById('musicStatus');
     let isPlayingMusic = false;
 
-    // Beautiful playback control
     function togglePlaySong(forcePlay = null) {
       const shouldPlay = forcePlay !== null ? forcePlay : !isPlayingMusic;
-
       if (shouldPlay) {
         bgMusic.play().then(() => {
           isPlayingMusic = true;
           musicStatus.innerText = "Playing Ok Jaanu";
           musicToggle.innerHTML = '<i class="fa-solid fa-volume-high animate-bounce"></i>';
-        }).catch((err) => {
-          console.log("Audio waiting for user interaction/file.", err);
-          // If the local MP3 file is missing, inform the user with a friendly helper
-          showToast("Please place 'ok_jaanu_title_track.mp3' in the folder to play! 🎵");
+        }).catch(() => {
+          musicStatus.innerText = "Click to Play";
         });
       } else {
         bgMusic.pause();
@@ -887,64 +320,9 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
         musicToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
       }
     }
-
     musicToggle.addEventListener('click', () => togglePlaySong());
 
-
-    // --- ADVANCED WEB AUDIO API FOR TAP UX SOUND EFFECTS ---
-    let audioCtx = null;
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-    }
-
-    function playBell(noteFreq, duration, volume) {
-      try {
-        initAudio();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        const filter = audioCtx.createBiquadFilter();
-
-        osc.connect(filter);
-        filter.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        // Warm, cozy filter for sweet feedback tones
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(800, audioCtx.currentTime);
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(noteFreq, audioCtx.currentTime);
-
-        gain.gain.setValueAtTime(0, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch(e) { console.log("Sound effect couldn't play: ", e); }
-    }
-
-    function playSparkleSound() {
-      [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
-        setTimeout(() => playBell(freq, 1.2, 0.07), idx * 100);
-      });
-    }
-
-    function playCuteBubbleSound() {
-      playBell(880, 0.4, 0.08);
-      setTimeout(() => playBell(1109, 0.5, 0.06), 80);
-    }
-
-    function playPitchShiftBeep(index) {
-      playBell(220 + (index * 80), 0.3, 0.04);
-    }
-
-
-    // --- FLOATING HEARTS CANVAS BACKGROUND ---
+    // --- FLOATING HEARTS BACKGROUND CANVAS ---
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
     let hearts = [];
@@ -961,24 +339,19 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
         this.reset();
         this.y = Math.random() * canvas.height;
       }
-
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = canvas.height + 20;
         this.size = Math.random() * 15 + 8;
         this.speedY = Math.random() * 0.8 + 0.4;
         this.speedX = Math.random() * 0.4 - 0.2;
-        this.opacity = Math.random() * 0.3 + 0.1;
+        this.opacity = Math.random() * 0.2 + 0.1;
       }
-
       update() {
         this.y -= this.speedY;
         this.x += this.speedX;
-        if (this.y < -20 || this.x < -20 || this.x > canvas.width + 20) {
-          this.reset();
-        }
+        if (this.y < -20) this.reset();
       }
-
       draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
@@ -993,52 +366,36 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
       }
     }
 
-    for (let i = 0; i < 25; i++) {
-      hearts.push(new BackgroundHeart());
-    }
+    for (let i = 0; i < 25; i++) hearts.push(new BackgroundHeart());
 
     function animateHearts() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      hearts.forEach(heart => {
-        heart.update();
-        heart.draw();
-      });
+      hearts.forEach(h => { h.update(); h.draw(); });
       requestAnimationFrame(animateHearts);
     }
     animateHearts();
 
     function triggerHeartExplosion() {
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 35; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart-particle text-rose-500 text-2xl';
         heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
         heart.style.left = `${window.innerWidth / 2}px`;
         heart.style.top = `${window.innerHeight / 2}px`;
         
-        const delay = Math.random() * 0.5;
         const duration = Math.random() * 3 + 2;
-        const size = Math.random() * 1.5 + 0.5;
-        
         heart.style.animation = `floatUp ${duration}s ease-out forwards`;
-        heart.style.animationDelay = `${delay}s`;
-        heart.style.transform = `scale(${size})`;
-        
-        const drift = Math.random() * 400 - 200;
-        heart.style.marginLeft = `${drift}px`;
+        heart.style.marginLeft = `${Math.random() * 400 - 200}px`;
 
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), (duration + delay) * 1000);
+        setTimeout(() => heart.remove(), duration * 1000);
       }
     }
 
-    // --- APP STARTUP & PRE-FLIGHT ---
     window.onload = function() {
       document.body.style.overflowY = 'hidden';
-      renderState();
     }
   </script>
 </body>
 </html>
-
-```
 
