@@ -1,0 +1,1128 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Jaanuu, From Your Sattuu 💖</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome for romantic icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff5f6;
+      overflow-x: hidden;
+    }
+    .font-romantic {
+      font-family: 'Great Vibes', cursive;
+    }
+    .font-serif-elegant {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    /* Elegant Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #ffe3e6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ffb3bc;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f43f5e;
+    }
+
+    /* Envelope Opening Animation Keyframes */
+    .envelope-wrapper {
+      perspective: 1000px;
+    }
+    .envelope {
+      position: relative;
+      background: #f43f5e;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      transition: transform 0.5s ease;
+    }
+    .envelope.open {
+      transform: translateY(150px) rotateX(10deg);
+    }
+    .lid {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-top: 110px solid #e11d48;
+      top: 0;
+      left: 0;
+      z-index: 30;
+      transform-origin: top;
+      transition: transform 0.6s ease, z-index 0.2s;
+    }
+    @media (max-width: 640px) {
+      .lid {
+        border-left-width: 140px;
+        border-right-width: 140px;
+        border-top-width: 90px;
+      }
+    }
+    .envelope.open .lid {
+      transform: rotateX(180deg);
+      z-index: 10;
+      border-top-color: #f43f5e;
+    }
+    .letter-paper {
+      position: absolute;
+      background: #fff;
+      z-index: 20;
+      transition: transform 0.8s ease, z-index 0.4s;
+    }
+    .envelope.open .letter-paper {
+      transform: translateY(-160px);
+      z-index: 40;
+    }
+
+    /* Hearts floating animation */
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) scale(0.3) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    .heart-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+      animation: floatUp 6s linear infinite;
+    }
+
+    /* Pulsing Wax Seal */
+    @keyframes pulseGold {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); }
+      50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(234, 179, 8, 0.7); }
+    }
+    .wax-seal {
+      animation: pulseGold 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col items-center">
+
+  <!-- Interactive Floating Hearts Canvas Background -->
+  <canvas id="heartCanvas" class="fixed inset-0 pointer-events-none z-10"></canvas>
+
+  <!-- Sweet Background Music Ambient Synthesizer -->
+  <div class="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-2 rounded-full shadow-lg border border-rose-100">
+    <button id="musicToggle" class="w-9 h-9 rounded-full bg-rose-500 text-white flex items-center justify-center hover:bg-rose-600 transition-colors focus:outline-none">
+      <i class="fa-solid fa-music"></i>
+    </button>
+    <span class="text-xs font-medium text-rose-700 select-none pr-1" id="musicStatus">Play Soft Music</span>
+  </div>
+
+  <!-- CONTROL PANEL TOGGLE (Only visible to Sattuu to customize!) -->
+  <div class="fixed top-4 left-4 z-50">
+    <button id="toggleConfig" class="bg-rose-100/90 text-rose-700 hover:bg-rose-200 backdrop-blur px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-md border border-rose-200 transition-all">
+      <i class="fa-solid fa-cog animate-spin" style="animation-duration: 6s;"></i> Sattuu's Controls
+    </button>
+  </div>
+
+  <!-- INTRO: THE MAGIC ENVELOPE SCREEN -->
+  <div id="introScreen" class="fixed inset-0 bg-gradient-to-br from-rose-100 via-pink-50 to-rose-200 flex flex-col items-center justify-center z-40 px-4 transition-all duration-1000">
+    <div class="text-center mb-8 max-w-md animate-fade-in">
+      <h1 class="font-romantic text-5xl sm:text-6xl text-rose-600 mb-2">My Dearest Jaanuu</h1>
+      <p class="text-sm text-rose-700 tracking-wide font-medium uppercase">You have received a highly confidential & cute letter</p>
+      <p class="text-xs text-rose-400 mt-1 italic">Click the golden wax seal to unlock the heart of your Sattuu</p>
+    </div>
+
+    <!-- Envelope -->
+    <div class="envelope-wrapper relative flex items-center justify-center w-80 sm:w-[320px] h-52 sm:h-56 mt-4">
+      <div id="mainEnvelope" class="envelope w-full h-full rounded-b-xl flex items-center justify-center cursor-pointer">
+        <div id="envelopeLid" class="lid"></div>
+        
+        <!-- Wax Seal Button -->
+        <button id="openEnvelopeBtn" class="wax-seal absolute z-50 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 border-2 border-yellow-300 flex items-center justify-center shadow-lg transform active:scale-90 transition-transform">
+          <i class="fa-solid fa-heart text-2xl text-rose-600 drop-shadow"></i>
+        </button>
+
+        <!-- Decorative elements inside the closed letter -->
+        <div class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-rose-600/20 to-transparent pointer-events-none rounded-b-xl"></div>
+        <div class="absolute bottom-4 left-4 text-white/40 text-xs font-romantic text-lg">For Jaanuu</div>
+        <div class="absolute bottom-4 right-4 text-white/40 text-xs font-romantic text-lg">From Sattuu</div>
+
+        <!-- Hidden letter page that slides out slightly first -->
+        <div id="miniLetter" class="letter-paper w-[90%] h-[85%] bg-stone-50 rounded-md shadow-inner flex flex-col p-4 justify-between select-none">
+          <div class="border-b border-rose-100 pb-1 text-center">
+            <span class="font-romantic text-rose-600 text-xl font-bold">Unfolding Love...</span>
+          </div>
+          <div class="space-y-1.5 flex-1 py-2">
+            <div class="h-1.5 bg-rose-200/50 rounded w-5/6"></div>
+            <div class="h-1.5 bg-rose-200/50 rounded w-full"></div>
+            <div class="h-1.5 bg-rose-200/50 rounded w-4/6"></div>
+          </div>
+          <div class="flex justify-between items-center text-[9px] text-rose-400">
+            <span>Always Yours</span>
+            <span>💖</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 text-rose-400 text-xs flex items-center gap-1">
+      <i class="fa-solid fa-lock"></i> Secured with pure endless romance
+    </div>
+  </div>
+
+
+  <!-- MAIN ROMANTIC CONTENT PAGE (Initially blurred / hidden) -->
+  <main id="mainContent" class="opacity-0 filter blur-lg transition-all duration-1000 max-w-4xl w-full px-4 pt-16 pb-24 space-y-16 pointer-events-none">
+    
+    <!-- Hero / Header Portrait Section -->
+    <header class="text-center relative">
+      <div class="inline-block relative">
+        <!-- Floating Rose Petals around hero -->
+        <div class="absolute -top-6 -left-6 text-rose-400 text-2xl animate-bounce" style="animation-duration: 3s;"><i class="fa-solid fa-seedling"></i></div>
+        <div class="absolute -bottom-6 -right-6 text-rose-400 text-2xl animate-bounce" style="animation-duration: 4s;"><i class="fa-solid fa-heart"></i></div>
+        
+        <h2 id="heroRomanticHeader" class="font-romantic text-6xl sm:text-7xl text-rose-600 leading-none drop-shadow-sm">To My Dearest Jaanuu</h2>
+      </div>
+      <p id="heroSubHeader" class="font-serif-elegant italic text-lg sm:text-xl text-stone-600 mt-4 max-w-lg mx-auto">
+        "You are the rhythm of my heart, the quiet in my chaos, and the sweetness in my everyday."
+      </p>
+      
+      <!-- Visual Divider -->
+      <div class="flex items-center justify-center gap-4 mt-6">
+        <span class="h-[1px] w-12 bg-rose-200"></span>
+        <i class="fa-solid fa-heart text-rose-400 text-sm animate-pulse"></i>
+        <span class="h-[1px] w-12 bg-rose-200"></span>
+      </div>
+    </header>
+
+    <!-- ROMANTIC LOVE LETTER SECTION -->
+    <section class="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-rose-100/50 relative overflow-hidden">
+      <!-- Decorative vintage corners -->
+      <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-rose-200/50 rounded-tl-3xl m-2"></div>
+      <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-rose-200/50 rounded-tr-3xl m-2"></div>
+      <div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-rose-200/50 rounded-bl-3xl m-2"></div>
+      <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-rose-200/50 rounded-br-3xl m-2"></div>
+
+      <!-- Watermark background heart -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
+        <i class="fa-solid fa-heart text-[400px] text-rose-600"></i>
+      </div>
+
+      <div class="prose max-w-none text-stone-700 leading-relaxed font-serif-elegant space-y-6 relative z-10 text-base sm:text-lg">
+        <p class="font-bold text-rose-600 font-romantic text-3xl">My Beautiful Jaanuu,</p>
+        
+        <div id="loveLetterBody" class="whitespace-pre-line space-y-4">
+          I am sitting here thinking about us, and I wanted to write you something that shows you how incredibly much you mean to me. You are my home, my anchor, and my happiest thought.
+
+          Every single time you call me <strong class="text-rose-600">"Sattuu"</strong>, my heart melts a little more. It’s my favorite sound in the entire world, and the prettiest way my name has ever been spoken. 
+
+          I love you not only for who you are, but for who I am when I am with you. You make the world brighter, calmer, and infinitely more beautiful. This little page is a small canvas of my endless adoration for you.
+        </div>
+
+        <div class="pt-8 flex flex-col items-end">
+          <p class="text-sm text-stone-400 not-italic">Forever & always yours,</p>
+          <p class="font-romantic text-4xl text-rose-600 font-bold mt-1" id="signatureName">Your Sattuu</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTO GALLERY SECTION WITH EASY UPLOAD -->
+    <section class="space-y-6">
+      <div class="text-center">
+        <h3 class="font-serif-elegant text-2xl sm:text-3xl text-stone-800 font-bold">Our Captured Moments</h3>
+        <p class="text-sm text-rose-500 font-medium">Click on any photo frame below to upload or change to our real picture!</p>
+      </div>
+
+      <!-- Grid of Memories -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        
+        <!-- Image Card 1 -->
+        <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(1)">
+            <img id="galleryImg1" src="" class="hidden w-full h-full object-cover rounded-lg" alt="Memory 1">
+            <div id="galleryPlaceholder1" class="text-center p-4">
+              <i class="fa-solid fa-camera-retro text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
+              <p class="text-xs text-rose-500 font-semibold">Upload Photo 1</p>
+              <p class="text-[10px] text-stone-400 mt-1">(First Day, First Date or Beautiful Smile)</p>
+            </div>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
+              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Photo</span>
+            </div>
+          </div>
+          <input type="file" id="imageInput1" accept="image/*" class="hidden" onchange="handleImageFile(this, 1)">
+          <div class="mt-3 text-center">
+            <p id="imageCap1" class="text-sm font-semibold text-stone-700 font-serif-elegant">The Day I Smiled Brightest</p>
+            <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
+          </div>
+        </div>
+
+        <!-- Image Card 2 -->
+        <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(2)">
+            <img id="galleryImg2" src="" class="hidden w-full h-full object-cover rounded-lg" alt="Memory 2">
+            <div id="galleryPlaceholder2" class="text-center p-4">
+              <i class="fa-solid fa-heart text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
+              <p class="text-xs text-rose-500 font-semibold">Upload Photo 2</p>
+              <p class="text-[10px] text-stone-400 mt-1">(Your favorite picture of us together)</p>
+            </div>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
+              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Photo</span>
+            </div>
+          </div>
+          <input type="file" id="imageInput2" accept="image/*" class="hidden" onchange="handleImageFile(this, 2)">
+          <div class="mt-3 text-center">
+            <p id="imageCap2" class="text-sm font-semibold text-stone-700 font-serif-elegant">Holding Hands & Hearts</p>
+            <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
+          </div>
+        </div>
+
+        <!-- Image Card 3 -->
+        <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(3)">
+            <img id="galleryImg3" src="" class="hidden w-full h-full object-cover rounded-lg" alt="Memory 3">
+            <div id="galleryPlaceholder3" class="text-center p-4">
+              <i class="fa-solid fa-wand-magic-sparkles text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
+              <p class="text-xs text-rose-500 font-semibold">Upload Photo 3</p>
+              <p class="text-[10px] text-stone-400 mt-1">(A cute selfie or a silly candid moment)</p>
+            </div>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
+              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Photo</span>
+            </div>
+          </div>
+          <input type="file" id="imageInput3" accept="image/*" class="hidden" onchange="handleImageFile(this, 3)">
+          <div class="mt-3 text-center">
+            <p id="imageCap3" class="text-sm font-semibold text-stone-700 font-serif-elegant">Just Being Us</p>
+            <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- OUR ROMANTIC LOVE TIMELINE -->
+    <section class="space-y-8">
+      <div class="text-center">
+        <h3 class="font-serif-elegant text-2xl sm:text-3xl text-stone-800 font-bold">Our Sweet Journey</h3>
+        <p class="text-sm text-rose-500 font-medium">Small beautiful milestones of our endless story</p>
+      </div>
+
+      <div class="relative border-l-2 border-rose-200 ml-4 md:ml-32 space-y-12">
+        
+        <!-- Timeline Item 1 -->
+        <div class="relative pl-8">
+          <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-rose-400 border-4 border-white shadow-sm flex items-center justify-center"></div>
+          <div>
+            <span id="timelineDate1" class="text-xs font-bold text-rose-500 tracking-wider uppercase font-mono">The Beautiful Beginning</span>
+            <h4 id="timelineTitle1" class="text-lg font-bold text-stone-800 font-serif-elegant mt-1">Our Eyes Met & The World Paused</h4>
+            <p id="timelineDesc1" class="text-sm text-stone-600 mt-2">The magical day when fate aligned and we finally got to talk. Little did I know that day, my whole universe was about to change for the better.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="relative pl-8">
+          <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-rose-400 border-4 border-white shadow-sm flex items-center justify-center"></div>
+          <div>
+            <span id="timelineDate2" class="text-xs font-bold text-rose-500 tracking-wider uppercase font-mono">My Favorite Name</span>
+            <h4 id="timelineTitle2" class="text-lg font-bold text-stone-800 font-serif-elegant mt-1">When You Called Me "Sattuu"</h4>
+            <p id="timelineDesc2" class="text-sm text-stone-600 mt-2">The sweetest syllable to ever leave your lips. The moment you called me Sattuu, it instantly became more than just a name—it became our love code.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="relative pl-8">
+          <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-rose-400 border-4 border-white shadow-sm flex items-center justify-center"></div>
+          <div>
+            <span id="timelineDate3" class="text-xs font-bold text-rose-500 tracking-wider uppercase font-mono">Today & Forever</span>
+            <h4 id="timelineTitle3" class="text-lg font-bold text-stone-800 font-serif-elegant mt-1">Loving You More Every Single Day</h4>
+            <p id="timelineDesc3" class="text-sm text-stone-600 mt-2">Every sunrise brings new reasons to fall deeper in love with you. No matter where life takes us, I promise to always keep you safe and smiling in my heart.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE LOVE-JAR & SLIDER -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Interactive Love Jar of Compliments -->
+      <div class="bg-rose-50/50 rounded-2xl p-6 border border-rose-100 flex flex-col items-center justify-between text-center min-h-[300px]">
+        <div>
+          <span class="text-rose-500 text-3xl"><i class="fa-solid fa-cookie-bite"></i></span>
+          <h4 class="font-serif-elegant text-xl font-bold text-stone-800 mt-2">Jaanuu's Sweet Jar</h4>
+          <p class="text-xs text-stone-500 mt-1">Tap the heart jar to pull out a sweet reason why Sattuu loves you!</p>
+        </div>
+
+        <!-- Visual Love Jar Animation -->
+        <div id="jarButton" class="relative cursor-pointer transition-transform transform active:scale-95 duration-200 my-4 group">
+          <!-- Jar Container -->
+          <div class="w-24 h-28 border-4 border-rose-300 rounded-2xl rounded-t-lg bg-white/70 shadow-lg relative flex items-center justify-center">
+            <!-- Jar Lid -->
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-rose-400 rounded-full border-b-2 border-rose-500"></div>
+            <!-- Jar label -->
+            <div class="bg-rose-100 border border-rose-200 px-2 py-1 rounded text-[10px] font-bold text-rose-600 uppercase tracking-widest pointer-events-none">
+              LOVE NOTES
+            </div>
+            <!-- Dynamic Floating Hearts inside Jar -->
+            <div class="absolute bottom-2 inset-x-2 flex justify-around opacity-70 group-hover:animate-bounce">
+              <i class="fa-solid fa-heart text-xs text-rose-400"></i>
+              <i class="fa-solid fa-heart text-sm text-rose-500"></i>
+              <i class="fa-solid fa-heart text-xs text-rose-300"></i>
+            </div>
+          </div>
+        </div>
+
+        <div id="complimentBox" class="min-h-[50px] flex items-center justify-center px-4">
+          <p class="text-sm font-serif-elegant italic text-rose-700 bg-white px-4 py-2 rounded-lg border border-rose-100 shadow-sm" id="complimentText">
+            "Click the jar to read my heart..."
+          </p>
+        </div>
+      </div>
+
+      <!-- Love Slider Scale -->
+      <div class="bg-rose-50/50 rounded-2xl p-6 border border-rose-100 flex flex-col items-center justify-between text-center min-h-[300px]">
+        <div>
+          <span class="text-rose-500 text-3xl"><i class="fa-solid fa-scale-unbalanced-rebuild"></i></span>
+          <h4 class="font-serif-elegant text-xl font-bold text-stone-800 mt-2">Sattuu's Love-O-Meter</h4>
+          <p class="text-xs text-stone-500 mt-1">Drag the handle to see exactly how much your Sattuu loves you!</p>
+        </div>
+
+        <div class="w-full px-6 my-6">
+          <input type="range" id="loveMeter" min="1" max="10" value="5" class="w-full accent-rose-500 cursor-pointer h-2 bg-rose-200 rounded-lg appearance-none">
+          <div class="flex justify-between text-[10px] text-stone-400 font-mono mt-2">
+            <span>A LOT</span>
+            <span>INFINITE</span>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <div class="bg-white px-6 py-4 rounded-xl border border-rose-100 shadow-sm min-h-[70px] flex flex-col justify-center items-center">
+            <p id="meterMessage" class="text-sm font-semibold text-rose-600 font-serif-elegant">"More than the stars in the night sky."</p>
+            <p id="meterPercent" class="text-xs text-stone-400 mt-1 font-mono">Loving Capacity: 10,000%</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CALL TO ACTION / EXPORTER NOTE -->
+    <footer class="text-center space-y-4">
+      <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-rose-200 to-transparent"></div>
+      <p class="font-romantic text-3xl text-rose-500">Yours forever, Sattuu</p>
+      <p class="text-[10px] text-stone-400 font-mono">Made with endless cuddles, high-fidelity sweet sighs, and infinite care.</p>
+    </footer>
+
+  </main>
+
+
+  <!-- MODAL: SATTUU'S SETTINGS / CONFIGURATION PANEL -->
+  <div id="configPanel" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto border border-rose-100 p-6 flex flex-col">
+      <div class="flex items-center justify-between border-b pb-4 mb-4">
+        <h3 class="font-bold text-stone-800 flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-rose-500"></i> Sattuu's Private Love Control
+        </h3>
+        <button id="closeConfig" class="text-stone-400 hover:text-stone-600 text-xl font-bold">&times;</button>
+      </div>
+
+      <p class="text-xs text-rose-500 bg-rose-50 p-2.5 rounded-lg mb-4">
+        Customize this page for your Jaanuu! Change the texts, titles, memories, and upload images. Once you're done, click the <strong>Export Sealed Letter</strong> button below to download your unique HTML file to send directly to her!
+      </p>
+
+      <div class="space-y-4 flex-1">
+        <!-- Main Titles Customizer -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Your Jaanuu's Name</label>
+          <input type="text" id="cfgJaanuuName" class="w-full text-sm border p-2 rounded focus:outline-none focus:ring-1 focus:ring-rose-400" value="Jaanuu">
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-stone-500 mb-1">Your Name (Signature)</label>
+          <input type="text" id="cfgSattuuName" class="w-full text-sm border p-2 rounded focus:outline-none focus:ring-1 focus:ring-rose-400" value="Sattuu">
+        </div>
+
+        <!-- Letter Body Customizer -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-stone-500 mb-1">The Romantic Love Letter</label>
+          <textarea id="cfgLetterText" rows="6" class="w-full text-sm border p-2 rounded focus:outline-none focus:ring-1 focus:ring-rose-400 font-serif"></textarea>
+        </div>
+
+        <!-- Captions for Photos Customizer -->
+        <div class="space-y-2">
+          <label class="block text-xs font-bold uppercase text-stone-500">Photo Captions</label>
+          <input type="text" id="cfgCap1" class="w-full text-sm border p-2 rounded" placeholder="Caption 1">
+          <input type="text" id="cfgCap2" class="w-full text-sm border p-2 rounded" placeholder="Caption 2">
+          <input type="text" id="cfgCap3" class="w-full text-sm border p-2 rounded" placeholder="Caption 3">
+        </div>
+
+        <!-- Memory Timeline Edit Section -->
+        <div class="space-y-3">
+          <label class="block text-xs font-bold uppercase text-stone-500">Timeline Milestones</label>
+          <!-- Item 1 -->
+          <div class="p-2 border rounded bg-stone-50 space-y-1">
+            <input type="text" id="cfgTimeDate1" class="w-full text-xs border p-1 rounded font-bold" placeholder="Milestone 1 Date/Label">
+            <input type="text" id="cfgTimeTitle1" class="w-full text-xs border p-1 rounded" placeholder="Milestone 1 Title">
+            <textarea id="cfgTimeDesc1" class="w-full text-xs border p-1 rounded" rows="2" placeholder="Milestone 1 Description"></textarea>
+          </div>
+          <!-- Item 2 -->
+          <div class="p-2 border rounded bg-stone-50 space-y-1">
+            <input type="text" id="cfgTimeDate2" class="w-full text-xs border p-1 rounded font-bold" placeholder="Milestone 2 Date/Label">
+            <input type="text" id="cfgTimeTitle2" class="w-full text-xs border p-1 rounded" placeholder="Milestone 2 Title">
+            <textarea id="cfgTimeDesc2" class="w-full text-xs border p-1 rounded" rows="2" placeholder="Milestone 2 Description"></textarea>
+          </div>
+          <!-- Item 3 -->
+          <div class="p-2 border rounded bg-stone-50 space-y-1">
+            <input type="text" id="cfgTimeDate3" class="w-full text-xs border p-1 rounded font-bold" placeholder="Milestone 3 Date/Label">
+            <input type="text" id="cfgTimeTitle3" class="w-full text-xs border p-1 rounded" placeholder="Milestone 3 Title">
+            <textarea id="cfgTimeDesc3" class="w-full text-xs border p-1 rounded" rows="2" placeholder="Milestone 3 Description"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t pt-4 mt-6 flex flex-col gap-2">
+        <button id="saveConfig" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+          <i class="fa-solid fa-circle-check"></i> Apply to Current View
+        </button>
+        <button id="exportHtml" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow">
+          <i class="fa-solid fa-file-arrow-down animate-bounce"></i> Export Sealed Letter (.html)
+        </button>
+        <p class="text-[10px] text-stone-400 text-center mt-1">Exporting downloads a clean, customized copy containing your base64 images and written texts that works forever on any phone or computer offline!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Feedback Notification Box -->
+  <div id="toastNotification" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-rose-600 text-white px-4 py-2 rounded-full shadow-lg text-xs font-semibold tracking-wider flex items-center gap-2 transition-all duration-300 transform translate-y-12 opacity-0 pointer-events-none">
+    <i class="fa-solid fa-heart animate-ping"></i> <span id="toastMessage">Loved Applied!</span>
+  </div>
+
+
+  <!-- SCRIPTS & APPLICATION LOGIC -->
+  <script>
+    // --- APP STATE & LOCALSTORAGE ---
+    // A database schema using local variables or localStorage for continuous browser editing sessions
+    const state = {
+      jaanuuName: localStorage.getItem('romantic_jaanuu') || 'Jaanuu',
+      sattuuName: localStorage.getItem('romantic_sattuu') || 'Sattuu',
+      letterText: localStorage.getItem('romantic_letter') || `I am sitting here thinking about us, and I wanted to write you something that shows you how incredibly much you mean to me. You are my home, my anchor, and my happiest thought.
+
+Every single time you call me "Sattuu", my heart melts a little more. It’s my favorite sound in the entire world, and the prettiest way my name has ever been spoken. 
+
+I love you not only for who you are, but for who I am when I am with you. You make the world brighter, calmer, and infinitely more beautiful. This little page is a small canvas of my endless adoration for you.`,
+      cap1: localStorage.getItem('romantic_cap1') || 'The Day I Smiled Brightest',
+      cap2: localStorage.getItem('romantic_cap2') || 'Holding Hands & Hearts',
+      cap3: localStorage.getItem('romantic_cap3') || 'Just Being Us',
+      timeDate1: localStorage.getItem('romantic_tdate1') || 'The Beautiful Beginning',
+      timeTitle1: localStorage.getItem('romantic_ttitle1') || 'Our Eyes Met & The World Paused',
+      timeDesc1: localStorage.getItem('romantic_tdesc1') || 'The magical day when fate aligned and we finally got to talk. Little did I know that day, my whole universe was about to change for the better.',
+      timeDate2: localStorage.getItem('romantic_tdate2') || 'My Favorite Name',
+      timeTitle2: localStorage.getItem('romantic_ttitle2') || 'When You Called Me "Sattuu"',
+      timeDesc2: localStorage.getItem('romantic_tdesc2') || 'The sweetest syllable to ever leave your lips. The moment you called me Sattuu, it instantly became more than just a name—it became our love code.',
+      timeDate3: localStorage.getItem('romantic_tdate3') || 'Today & Forever',
+      timeTitle3: localStorage.getItem('romantic_ttitle3') || 'Loving You More Every Single Day',
+      timeDesc3: localStorage.getItem('romantic_tdesc3') || 'Every sunrise brings new reasons to fall deeper in love with you. No matter where life takes us, I promise to always keep you safe and smiling in my heart.',
+      imgData1: localStorage.getItem('romantic_img1') || '',
+      imgData2: localStorage.getItem('romantic_img2') || '',
+      imgData3: localStorage.getItem('romantic_img3') || '',
+    };
+
+    // Compliments Array for Love Jar
+    const romanticCompliments = [
+      "Your laugh is my absolute favorite sound in the world.",
+      "The way your nose crinkles when you smile melts my heart entirely.",
+      "You make me feel like the luckiest person in the galaxy just by calling me Sattuu.",
+      "No matter how rough my day is, one thought of you fixes everything.",
+      "I love how safe I feel when I am holding you close.",
+      "You make even the simplest days feel like a beautiful fairytale.",
+      "Your kind heart, gentle soul, and bright intelligence inspire me daily.",
+      "I wish I could freeze time whenever you look at me.",
+      "You've shown me what true, pure, and effortless love feels like."
+    ];
+
+    // Love scale messages based on slide value
+    const loveScaleMessages = [
+      "No words exist to measure this.",
+      "More than the stars in the night sky.",
+      "Bigger than the ocean depths.",
+      "To the moon, the sun, and back a billion times.",
+      "Infinitely expanding every microsecond.",
+      "Enough to fill a trillion universes.",
+      "Past the edge of forever.",
+      "More than there are atoms in the cosmos.",
+      "Beyond all imaginable timelines.",
+      "Sattuu loves Jaanuu to absolute infinity! 💖"
+    ];
+
+    // --- RENDER CURRENT STATE TO DOM ---
+    function renderState() {
+      // Headers
+      document.getElementById('heroRomanticHeader').innerText = `To My Dearest ${state.jaanuuName}`;
+      document.getElementById('signatureName').innerText = `Your ${state.sattuuName}`;
+      
+      // Letter
+      document.getElementById('loveLetterBody').innerText = state.letterText;
+
+      // Photo Gallery Image Sources
+      for (let i = 1; i <= 3; i++) {
+        const imgEl = document.getElementById(`galleryImg${i}`);
+        const placeholderEl = document.getElementById(`galleryPlaceholder${i}`);
+        const capEl = document.getElementById(`imageCap${i}`);
+
+        if (state[`imgData${i}`]) {
+          imgEl.src = state[`imgData${i}`];
+          imgEl.classList.remove('hidden');
+          placeholderEl.classList.add('hidden');
+        } else {
+          imgEl.src = "";
+          imgEl.classList.add('hidden');
+          placeholderEl.classList.remove('hidden');
+        }
+        capEl.innerText = state[`cap${i}`];
+      }
+
+      // Timeline Rendering
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById(`timelineDate${i}`).innerText = state[`timeDate${i}`];
+        document.getElementById(`timelineTitle${i}`).innerText = state[`timeTitle${i}`];
+        document.getElementById(`timelineDesc${i}`).innerText = state[`timeDesc${i}`];
+      }
+
+      // Sync form control values
+      document.getElementById('cfgJaanuuName').value = state.jaanuuName;
+      document.getElementById('cfgSattuuName').value = state.sattuuName;
+      document.getElementById('cfgLetterText').value = state.letterText;
+      document.getElementById('cfgCap1').value = state.cap1;
+      document.getElementById('cfgCap2').value = state.cap2;
+      document.getElementById('cfgCap3').value = state.cap3;
+      document.getElementById('cfgTimeDate1').value = state.timeDate1;
+      document.getElementById('cfgTimeTitle1').value = state.timeTitle1;
+      document.getElementById('cfgTimeDesc1').value = state.timeDesc1;
+      document.getElementById('cfgTimeDate2').value = state.timeDate2;
+      document.getElementById('cfgTimeTitle2').value = state.timeTitle2;
+      document.getElementById('cfgTimeDesc2').value = state.timeDesc2;
+      document.getElementById('cfgTimeDate3').value = state.timeDate3;
+      document.getElementById('cfgTimeTitle3').value = state.timeTitle3;
+      document.getElementById('cfgTimeDesc3').value = state.timeDesc3;
+    }
+
+    // --- DYNAMIC PHOTO UPLOAD HELPERS ---
+    function triggerImageUpload(index) {
+      document.getElementById(`imageInput${index}`).click();
+    }
+
+    function handleImageFile(input, index) {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Data = e.target.result;
+          state[`imgData${index}`] = base64Data;
+          localStorage.setItem(`romantic_img${index}`, base64Data);
+          renderState();
+          showToast("Photo added beautifully! 📸");
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // --- CONFIG MODAL & PERSISTENCE ---
+    const toggleConfigBtn = document.getElementById('toggleConfig');
+    const configPanel = document.getElementById('configPanel');
+    const closeConfigBtn = document.getElementById('closeConfig');
+    const saveConfigBtn = document.getElementById('saveConfig');
+    const exportHtmlBtn = document.getElementById('exportHtml');
+
+    toggleConfigBtn.addEventListener('click', () => {
+      configPanel.classList.remove('hidden');
+    });
+
+    closeConfigBtn.addEventListener('click', () => {
+      configPanel.classList.add('hidden');
+    });
+
+    saveConfigBtn.addEventListener('click', () => {
+      // Gather and update state
+      state.jaanuuName = document.getElementById('cfgJaanuuName').value || 'Jaanuu';
+      state.sattuuName = document.getElementById('cfgSattuuName').value || 'Sattuu';
+      state.letterText = document.getElementById('cfgLetterText').value;
+      state.cap1 = document.getElementById('cfgCap1').value;
+      state.cap2 = document.getElementById('cfgCap2').value;
+      state.cap3 = document.getElementById('cfgCap3').value;
+      state.timeDate1 = document.getElementById('cfgTimeDate1').value;
+      state.timeTitle1 = document.getElementById('cfgTimeTitle1').value;
+      state.timeDesc1 = document.getElementById('cfgTimeDesc1').value;
+      state.timeDate2 = document.getElementById('cfgTimeDate2').value;
+      state.timeTitle2 = document.getElementById('cfgTimeTitle2').value;
+      state.timeDesc2 = document.getElementById('cfgTimeDesc2').value;
+      state.timeDate3 = document.getElementById('cfgTimeDate3').value;
+      state.timeTitle3 = document.getElementById('cfgTimeTitle3').value;
+      state.timeDesc3 = document.getElementById('cfgTimeDesc3').value;
+
+      // Save to localStorage
+      localStorage.setItem('romantic_jaanuu', state.jaanuuName);
+      localStorage.setItem('romantic_sattuu', state.sattuuName);
+      localStorage.setItem('romantic_letter', state.letterText);
+      localStorage.setItem('romantic_cap1', state.cap1);
+      localStorage.setItem('romantic_cap2', state.cap2);
+      localStorage.setItem('romantic_cap3', state.cap3);
+      localStorage.setItem('romantic_tdate1', state.timeDate1);
+      localStorage.setItem('romantic_ttitle1', state.timeTitle1);
+      localStorage.setItem('romantic_tdesc1', state.timeDesc1);
+      localStorage.setItem('romantic_tdate2', state.timeDate2);
+      localStorage.setItem('romantic_ttitle2', state.timeTitle2);
+      localStorage.setItem('romantic_tdesc2', state.timeDesc2);
+      localStorage.setItem('romantic_tdate3', state.timeDate3);
+      localStorage.setItem('romantic_ttitle3', state.timeTitle3);
+      localStorage.setItem('romantic_tdesc3', state.timeDesc3);
+
+      renderState();
+      configPanel.classList.add('hidden');
+      showToast("Custom Love Customizations Saved! ❤️");
+    });
+
+    // --- HTML EXPORTER FUNCTIONALITY ---
+    exportHtmlBtn.addEventListener('click', () => {
+      // Creating a beautiful package of this entire customized app!
+      const currentHTML = document.documentElement.outerHTML;
+      
+      // Replace state initialization so it defaults to the edited values upon loading
+      let packageScript = `
+    const state = {
+      jaanuuName: ${JSON.stringify(state.jaanuuName)},
+      sattuuName: ${JSON.stringify(state.sattuuName)},
+      letterText: ${JSON.stringify(state.letterText)},
+      cap1: ${JSON.stringify(state.cap1)},
+      cap2: ${JSON.stringify(state.cap2)},
+      cap3: ${JSON.stringify(state.cap3)},
+      timeDate1: ${JSON.stringify(state.timeDate1)},
+      timeTitle1: ${JSON.stringify(state.timeTitle1)},
+      timeDesc1: ${JSON.stringify(state.timeDesc1)},
+      timeDate2: ${JSON.stringify(state.timeDate2)},
+      timeTitle2: ${JSON.stringify(state.timeTitle2)},
+      timeDesc2: ${JSON.stringify(state.timeDesc2)},
+      timeDate3: ${JSON.stringify(state.timeDate3)},
+      timeTitle3: ${JSON.stringify(state.timeTitle3)},
+      timeDesc3: ${JSON.stringify(state.timeDesc3)},
+      imgData1: ${JSON.stringify(state.imgData1)},
+      imgData2: ${JSON.stringify(state.imgData2)},
+      imgData3: ${JSON.stringify(state.imgData3)},
+    };
+      `;
+
+      // Match state initialization line from HTML and replace it to secure customization hardcoded
+      let editedHTML = currentHTML;
+      const originalStateRegex = /const\s+state\s*=\s*\{[\s\S]*?\};\s*\/\/ --- APP STATE & LOCALSTORAGE ---/g;
+      
+      // Make sure we include a clean setup to read this bundled data
+      const bundledStateInject = `const state = {
+      jaanuuName: ${JSON.stringify(state.jaanuuName)},
+      sattuuName: ${JSON.stringify(state.sattuuName)},
+      letterText: ${JSON.stringify(state.letterText)},
+      cap1: ${JSON.stringify(state.cap1)},
+      cap2: ${JSON.stringify(state.cap2)},
+      cap3: ${JSON.stringify(state.cap3)},
+      timeDate1: ${JSON.stringify(state.timeDate1)},
+      timeTitle1: ${JSON.stringify(state.timeTitle1)},
+      timeDesc1: ${JSON.stringify(state.timeDesc1)},
+      timeDate2: ${JSON.stringify(state.timeDate2)},
+      timeTitle2: ${JSON.stringify(state.timeTitle2)},
+      timeDesc2: ${JSON.stringify(state.timeDesc2)},
+      timeDate3: ${JSON.stringify(state.timeDate3)},
+      timeTitle3: ${JSON.stringify(state.timeTitle3)},
+      timeDesc3: ${JSON.stringify(state.timeDesc3)},
+      imgData1: ${JSON.stringify(state.imgData1)},
+      imgData2: ${JSON.stringify(state.imgData2)},
+      imgData3: ${JSON.stringify(state.imgData3)},
+    };`;
+
+      // Safely replace state assignment to lock-in values inside output code
+      editedHTML = editedHTML.replace(/const\s+state\s*=\s*\{[\s\S]*?imgData3:\s*localStorage\.getItem\('romantic_img3'\)\s*\|\|\s*''\s*,\s*\};/g, bundledStateInject);
+
+      // Trigger standard file download in browser
+      const blob = new Blob([editedHTML], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Love_Letter_For_My_Jaanuu.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast("Download Complete! Send it to her! 💌");
+    });
+
+
+    // --- TOAST NOTIFICATIONS ---
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const msgSpan = document.getElementById('toastMessage');
+      msgSpan.innerText = message;
+      
+      toast.classList.remove('translate-y-12', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-12', 'opacity-0');
+      }, 3000);
+    }
+
+
+    // --- ENVELOPE REVEAL MECHANISM ---
+    const openEnvelopeBtn = document.getElementById('openEnvelopeBtn');
+    const mainEnvelope = document.getElementById('mainEnvelope');
+    const introScreen = document.getElementById('introScreen');
+    const mainContent = document.getElementById('mainContent');
+
+    openEnvelopeBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Stop bubble so we don't double click
+      
+      // Trigger sounds
+      startSweetSynthLoop();
+      playSparkleSound();
+
+      // Open animations
+      mainEnvelope.classList.add('open');
+      
+      // Visual shower of hearts
+      triggerHeartExplosion();
+
+      // Fade out intro, slide and reveal actual loveletter
+      setTimeout(() => {
+        introScreen.classList.add('translate-y-[-120%]', 'opacity-0');
+        mainContent.classList.remove('pointer-events-none');
+        mainContent.classList.remove('opacity-0', 'blur-lg');
+        mainContent.classList.add('opacity-100', 'blur-0');
+        document.body.style.overflowY = 'auto';
+        showToast("Open with Sattuu's infinite love! ❤️");
+      }, 1200);
+    });
+
+
+    // --- INTERACTIVE LOVE COMPLIMENTS JAR ---
+    const jarButton = document.getElementById('jarButton');
+    const complimentText = document.getElementById('complimentText');
+
+    jarButton.addEventListener('click', () => {
+      // Pick random reason
+      const randomIndex = Math.floor(Math.random() * romanticCompliments.length);
+      const randomNote = romanticCompliments[randomIndex];
+      
+      complimentText.classList.add('scale-95', 'opacity-0');
+      playCuteBubbleSound();
+
+      setTimeout(() => {
+        complimentText.innerText = `"${randomNote}"`;
+        complimentText.classList.remove('scale-95', 'opacity-0');
+        complimentText.classList.add('scale-100', 'opacity-100');
+      }, 200);
+
+      // Create little hearts burst above jar
+      for(let i=0; i<4; i++) {
+        createFloatingHeartFromElement(jarButton);
+      }
+    });
+
+    // Helper to burst tiny hearts above an element (like the jar)
+    function createFloatingHeartFromElement(elem) {
+      const rect = elem.getBoundingClientRect();
+      const heart = document.createElement('div');
+      heart.className = 'text-rose-500 absolute pointer-events-none z-50 text-xl animate-ping';
+      heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
+      heart.style.left = `${rect.left + rect.width/2 + (Math.random() * 40 - 20)}px`;
+      heart.style.top = `${rect.top - 20}px`;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1000);
+    }
+
+
+    // --- LOVE METER CONTROLLER ---
+    const loveMeter = document.getElementById('loveMeter');
+    const meterMessage = document.getElementById('meterMessage');
+    const meterPercent = document.getElementById('meterPercent');
+
+    loveMeter.addEventListener('input', (e) => {
+      const value = parseInt(e.target.value);
+      const selectedMessage = loveScaleMessages[value - 1];
+      
+      meterMessage.innerText = `"${selectedMessage}"`;
+      
+      // Calculate cute mathematical representation of infinite love
+      if (value === 10) {
+        meterPercent.innerText = "Loving Capacity: ∞% (Break the Physics!)";
+      } else {
+        meterPercent.innerText = `Loving Capacity: ${(value * 15000).toLocaleString()}%`;
+      }
+      playPitchShiftBeep(value);
+    });
+
+
+    // --- MUSIC & AMBIENT AUDIO SYNTH (Web Audio API) ---
+    let audioCtx = null;
+    let synthLoopInterval = null;
+    let isPlayingMusic = false;
+    const musicToggle = document.getElementById('musicToggle');
+    const musicStatus = document.getElementById('musicStatus');
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    // Play a single soft romantic bell tone
+    function playBell(noteFreq, duration, volume) {
+      initAudio();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      // Low pass filter to make it cozy, warm, and sweet
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(800, audioCtx.currentTime);
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(noteFreq, audioCtx.currentTime);
+
+      // Envelope to soften gain strike
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    // Beautiful loop of warm romantic chords
+    // C Major 7 -> A Minor 7 -> F Major 7 -> G Major
+    const romanceChords = [
+      [261.63, 329.63, 392.00, 493.88], // Cmaj7 (C4, E4, G4, B4)
+      [220.00, 261.63, 329.63, 392.00], // Am7   (A3, C4, E4, G4)
+      [174.61, 220.00, 261.63, 329.63], // Fmaj7 (F3, A3, C4, E4)
+      [196.00, 246.94, 293.66, 392.00]  // G7    (G3, B3, D4, G4)
+    ];
+
+    let chordIdx = 0;
+    function startSweetSynthLoop() {
+      initAudio();
+      if (isPlayingMusic) return;
+      isPlayingMusic = true;
+      musicStatus.innerText = "Playing Soft Melody";
+      musicToggle.innerHTML = '<i class="fa-solid fa-volume-high animate-bounce"></i>';
+
+      // Start looping melody tones
+      let noteStep = 0;
+      synthLoopInterval = setInterval(() => {
+        const chord = romanceChords[chordIdx];
+        
+        // Pick a base note and dynamic arpeggios
+        if (noteStep % 4 === 0) {
+          // Play full soft block chord base
+          chord.forEach(freq => playBell(freq, 4.0, 0.05));
+        } else {
+          // Play a sweet single bell note for arpeggio
+          const noteFreq = chord[Math.floor(Math.random() * chord.length)] * 2; // Octave up
+          playBell(noteFreq, 2.0, 0.04);
+        }
+
+        noteStep++;
+        if (noteStep >= 16) {
+          noteStep = 0;
+          chordIdx = (chordIdx + 1) % romanceChords.length;
+        }
+      }, 600);
+    }
+
+    function stopSweetSynthLoop() {
+      if (synthLoopInterval) {
+        clearInterval(synthLoopInterval);
+      }
+      isPlayingMusic = false;
+      musicStatus.innerText = "Music Muted";
+      musicToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (isPlayingMusic) {
+        stopSweetSynthLoop();
+      } else {
+        startSweetSynthLoop();
+      }
+    });
+
+    // Sound effect: Opening Envelope
+    function playSparkleSound() {
+      initAudio();
+      const now = audioCtx.currentTime;
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+        setTimeout(() => {
+          playBell(freq, 1.2, 0.07);
+        }, idx * 100);
+      });
+    }
+
+    // Sound effect: Sweet bubble tap
+    function playCuteBubbleSound() {
+      initAudio();
+      playBell(880, 0.4, 0.08);
+      setTimeout(() => playBell(1109, 0.5, 0.06), 80);
+    }
+
+    // Sound effect: Pitch shift tone for Love Slider
+    function playPitchShiftBeep(index) {
+      initAudio();
+      // Calculate a sweet progressive note frequency based on scale 1 to 10
+      const startFreq = 220; 
+      const freqStep = 80;
+      playBell(startFreq + (index * freqStep), 0.3, 0.04);
+    }
+
+
+    // --- FLOATING HEARTS CANVAS BACKGROUND ---
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let hearts = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class BackgroundHeart {
+      constructor() {
+        this.reset();
+        this.y = Math.random() * canvas.height; // start randomized
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 20;
+        this.size = Math.random() * 15 + 8;
+        this.speedY = Math.random() * 0.8 + 0.4;
+        this.speedX = Math.random() * 0.4 - 0.2;
+        this.opacity = Math.random() * 0.3 + 0.1;
+      }
+
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        
+        if (this.y < -20 || this.x < -20 || this.x > canvas.width + 20) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = '#f43f5e';
+        ctx.beginPath();
+        
+        // Draw Heart Path on Canvas
+        const topY = this.y - this.size / 2;
+        ctx.moveTo(this.x, this.y);
+        ctx.bezierCurveTo(this.x - this.size / 2, topY, this.x - this.size, this.y - this.size / 3, this.x, this.y + this.size * 0.8);
+        ctx.bezierCurveTo(this.x + this.size, this.y - this.size / 3, this.x + this.size / 2, topY, this.x, this.y);
+        
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Create background hearts
+    for (let i = 0; i < 25; i++) {
+      hearts.push(new BackgroundHeart());
+    }
+
+    function animateHearts() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Update and Draw Background Hearts
+      hearts.forEach(heart => {
+        heart.update();
+        heart.draw();
+      });
+
+      requestAnimationFrame(animateHearts);
+    }
+    animateHearts();
+
+    // Trigger explosive heart-particles when letter is opened
+    function triggerHeartExplosion() {
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-particle text-rose-500 text-2xl';
+        heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        
+        // Start from center
+        heart.style.left = `${window.innerWidth / 2}px`;
+        heart.style.top = `${window.innerHeight / 2}px`;
+        
+        // Random drift/delay durations
+        const delay = Math.random() * 0.5;
+        const duration = Math.random() * 3 + 2;
+        const size = Math.random() * 1.5 + 0.5;
+        
+        heart.style.animation = `floatUp ${duration}s ease-out forwards`;
+        heart.style.animationDelay = `${delay}s`;
+        heart.style.transform = `scale(${size})`;
+        
+        // Add random horizontal shift through custom property
+        const drift = Math.random() * 400 - 200;
+        heart.style.marginLeft = `${drift}px`;
+
+        document.body.appendChild(heart);
+
+        // Remove elements clean
+        setTimeout(() => {
+          heart.remove();
+        }, (duration + delay) * 1000);
+      }
+    }
+
+
+    // --- APP STARTUP & PRE-FLIGHT ---
+    window.onload = function() {
+      // Prevent scrolling until opened
+      document.body.style.overflowY = 'hidden';
+      // Load current state (defaults or edited cached ones)
+      renderState();
+    }
+  </script>
+</body>
+</html>
+
+```
+
