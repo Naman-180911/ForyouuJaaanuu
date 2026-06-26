@@ -232,7 +232,6 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
         <!-- Image Card 1 (HEIC file) -->
         <div class="bg-white p-4 rounded-xl shadow-md border border-rose-100 transition-all duration-300">
           <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
-            <!-- Loader active while JavaScript converts the HEIC content dynamically -->
             <div id="loader1" class="absolute inset-0 flex flex-col items-center justify-center bg-rose-50/90 z-20">
               <div class="loader-spin mb-2"></div>
               <p class="text-[10px] text-rose-400 font-medium">Processing picture...</p>
@@ -295,13 +294,12 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
   </main>
 
   <script>
-    // Traditional fallback framework for JPG
     function handleImageLoadError(index) {
       document.getElementById(`galleryImg${index}`).classList.add('hidden');
       document.getElementById(`galleryPlaceholder${index}`).classList.remove('hidden');
     }
 
-    // --- HEIC IMAGE CONVERSION RUNTIME ---
+    // --- HEIC IMAGE CONVERSION RUNTIME WITH URL ENCODING SAFETY ---
     async function loadHeicImage(imgId, loaderId, placeholderId) {
       const imgElement = document.getElementById(imgId);
       const loaderElement = document.getElementById(loaderId);
@@ -309,27 +307,45 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
       const filePath = imgElement.getAttribute('data-heic');
 
       try {
-        // Fetch the file binary blob out of your repository path
-        const response = await fetch(filePath);
-        if (!response.ok) throw new Error("File not found");
+        // encodeURIComponent handles parenthesis and spaces safely for browser requests
+        const safePath = encodeURI(filePath);
+        
+        const response = await fetch(safePath);
+        if (!response.ok) throw new Error("File could not be grabbed from repository");
         const blob = await response.blob();
 
-        // Convert the raw HEIC blob to readable JPEG inside the client window browser memory
         const convertedBlob = await heic2any({
           blob: blob,
           toType: "image/jpeg",
           quality: 0.8
         });
 
-        // Set the transient conversion URL as source target
         const imgUrl = URL.createObjectURL(convertedBlob);
         imgElement.src = imgUrl;
         
-        // Render content swap smoothly
         loaderElement.classList.add('hidden');
         imgElement.classList.remove('hidden');
       } catch (error) {
-        console.error("HEIC parsing error for " + filePath + ":", error);
+        console.error("HEIC loading failed: ", error);
+        
+        // Double-check fallback: check if file was uploaded with capitalized extension (.HEIC)
+        if (!filePath.endsWith('.HEIC')) {
+          imgElement.setAttribute('data-heic', filePath.replace('.heic', '.HEIC'));
+          // Try exactly one more time with uppercase extension
+          try {
+            const upPath = encodeURI(imgElement.getAttribute('data-heic'));
+            const upResp = await fetch(upPath);
+            if (upResp.ok) {
+              const upBlob = await upResp.blob();
+              const upConv = await heic2any({ blob: upBlob, toType: "image/jpeg", quality: 0.8 });
+              imgElement.src = URL.createObjectURL(upConv);
+              loaderElement.classList.add('hidden');
+              imgElement.classList.remove('hidden');
+              return;
+            }
+          } catch(e){}
+        }
+        
         loaderElement.classList.add('hidden');
         placeholderElement.classList.remove('hidden');
       }
@@ -348,7 +364,7 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
       mainEnvelope.classList.add('open');
       triggerHeartExplosion();
 
-      // Trigger background dynamic decompression as soon as envelope breaks open
+      // Decompress files immediately as envelope opens
       loadHeicImage('galleryImg1', 'loader1', 'galleryPlaceholder1');
       loadHeicImage('galleryImg3', 'loader3', 'galleryPlaceholder3');
 
@@ -431,7 +447,6 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
 
     for (let i = 0; i < 25; i++) hearts.push(new BackgroundHeart());
 
-    // Animation frames loops
     function animateHearts() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       hearts.forEach(h => { h.update(); h.draw(); });
