@@ -127,15 +127,18 @@
 </head>
 <body class="min-h-screen text-slate-800 flex flex-col items-center">
 
+  <!-- HTML5 Audio Element targeting 'Ok Jaanu Title Track' -->
+  <audio id="bgMusic" src="ok_jaanu_title_track.mp3" loop></audio>
+
   <!-- Interactive Floating Hearts Canvas Background -->
   <canvas id="heartCanvas" class="fixed inset-0 pointer-events-none z-10"></canvas>
 
-  <!-- Sweet Background Music Ambient Synthesizer -->
+  <!-- Ambient Audio Controls for the custom song -->
   <div class="fixed bottom-4 right-4 z-50 flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-2 rounded-full shadow-lg border border-rose-100">
     <button id="musicToggle" class="w-9 h-9 rounded-full bg-rose-500 text-white flex items-center justify-center hover:bg-rose-600 transition-colors focus:outline-none">
       <i class="fa-solid fa-music"></i>
     </button>
-    <span class="text-xs font-medium text-rose-700 select-none pr-1" id="musicStatus">Play Soft Music</span>
+    <span class="text-xs font-medium text-rose-700 select-none pr-1" id="musicStatus">Play Title Track</span>
   </div>
 
   <!-- CONTROL PANEL TOGGLE (Only visible to Sattuu to customize!) -->
@@ -165,8 +168,8 @@
 
         <!-- Decorative elements inside the closed letter -->
         <div class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-rose-600/20 to-transparent pointer-events-none rounded-b-xl"></div>
-        <div class="absolute bottom-4 left-4 text-white/40 text-xs font-romantic text-lg">For Jaanuu</div>
-        <div class="absolute bottom-4 right-4 text-white/40 text-xs font-romantic text-lg">From Sattuu</div>
+        <div class="absolute bottom-4 left-4 text-white/40 text-xs font-romantic text-lg font-bold">For Jaanuu</div>
+        <div class="absolute bottom-4 right-4 text-white/40 text-xs font-romantic text-lg font-bold">From Sattuu</div>
 
         <!-- Hidden letter page that slides out slightly first -->
         <div id="miniLetter" class="letter-paper w-[90%] h-[85%] bg-stone-50 rounded-md shadow-inner flex flex-col p-4 justify-between select-none">
@@ -230,15 +233,15 @@
       </div>
 
       <div class="prose max-w-none text-stone-700 leading-relaxed font-serif-elegant space-y-6 relative z-10 text-base sm:text-lg">
-        <p class="font-bold text-rose-600 font-romantic text-3xl">My Beautiful Jaanuu,</p>
+        <p class="font-bold text-rose-600 font-romantic text-3xl font-bold">My Beautiful Jaanuu,</p>
         
-        <div id="loveLetterBody" class="whitespace-pre-line space-y-4">
-          I am sitting here thinking about us, and I wanted to write you something that shows you how incredibly much you mean to me. You are my home, my anchor, and my happiest thought.
+        <div id="loveLetterBody" class="whitespace-pre-line space-y-4 font-serif-elegant">Hyyyyy Jaaanuuuu, I Love youuu idk amaa su lakhuuu ik khaali lavaraa j laikha hase and me english gujarati mix ma lakhaa yk khaali english ma bov serious laage.. alsoo me aa letter lakhvanoj hato pan tame pehla aapi didhoo and pachhi mane puichu k me kyare aapvanoo😭😭 jenathi have evu laagse k tame kidhu etle me laikhoo..
 
-          Every single time you call me <strong class="text-rose-600">"Sattuu"</strong>, my heart melts a little more. It’s my favorite sound in the entire world, and the prettiest way my name has ever been spoken. 
+Hmm so idk from where to startt i justt Love youu forever i could not express it in my words but still when i wake up the first thing i check on my phone is your messagess and lovely reels you could not even imagine how happyy i wass when you said I love youuu tooh for the first timeee that was my best moment for sureee i was sooo soooo sooooooo happyy that i would even do anything for youu ya but homework and assignments would still be so out of my league 😜😜 sorry jaanuu 
 
-          I love you not only for who you are, but for who I am when I am with you. You make the world brighter, calmer, and infinitely more beautiful. This little page is a small canvas of my endless adoration for you.
-        </div>
+And yess indeed me maanu k me tane joto tuition maa cuz i really liked you since thenn but when you started talkin to mee i kneww that ur the one tame mane literally change kari kaaidhoo ekdum ego valo maanas jee rude hato (sometimes still noww😭😭) and yaaaa i still smile when i remember that we use to do our who reaches first reel liking competition karta tee you were my greatest opponent aapde te haji bhi karvu joye actuallyy that would be funn and nostalgicc
+
+Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni baar jatuj rayeluu che 😂🤣 bijo focus ama graphics ma aapuuu okk jaaanuuu i love youuu khajuriii tamari sugandh mara ma felavya karjoo💓💕</div>
 
         <div class="pt-8 flex flex-col items-end">
           <p class="text-sm text-stone-400 not-italic">Forever & always yours,</p>
@@ -247,11 +250,11 @@
       </div>
     </section>
 
-    <!-- PHOTO GALLERY SECTION WITH EASY UPLOAD -->
+    <!-- PHOTO GALLERY SECTION WITH GITHUB IMAGES -->
     <section class="space-y-6">
       <div class="text-center">
         <h3 class="font-serif-elegant text-2xl sm:text-3xl text-stone-800 font-bold">Our Captured Moments</h3>
-        <p class="text-sm text-rose-500 font-medium">Click on any photo frame below to upload or change to our real picture!</p>
+        <p class="text-sm text-rose-500 font-medium">Add these beautiful images to your GitHub repository to see them instantly!</p>
       </div>
 
       <!-- Grid of Memories -->
@@ -260,19 +263,19 @@
         <!-- Image Card 1 -->
         <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
           <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(1)">
-            <img id="galleryImg1" src="" class="hidden w-full h-full object-cover rounded-lg" alt="Memory 1">
-            <div id="galleryPlaceholder1" class="text-center p-4">
+            <img id="galleryImg1" src="20260620_205705(1).heic" class="w-full h-full object-cover rounded-lg" alt="Memory 1" onerror="handleImageLoadError(1)">
+            <div id="galleryPlaceholder1" class="hidden text-center p-4 absolute inset-0 flex flex-col items-center justify-center bg-rose-50">
               <i class="fa-solid fa-camera-retro text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
-              <p class="text-xs text-rose-500 font-semibold">Upload Photo 1</p>
-              <p class="text-[10px] text-stone-400 mt-1">(First Day, First Date or Beautiful Smile)</p>
+              <p class="text-xs text-rose-500 font-semibold">Image loading or needs upload...</p>
+              <p class="text-[9px] text-stone-400 mt-1 font-mono">Filename: 20260620_205705(1).heic</p>
             </div>
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
-              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Photo</span>
+              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Replacement</span>
             </div>
           </div>
           <input type="file" id="imageInput1" accept="image/*" class="hidden" onchange="handleImageFile(this, 1)">
           <div class="mt-3 text-center">
-            <p id="imageCap1" class="text-sm font-semibold text-stone-700 font-serif-elegant">The Day I Smiled Brightest</p>
+            <p id="imageCap1" class="text-sm font-semibold text-stone-700 font-serif-elegant">Our first picture togetherr</p>
             <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
           </div>
         </div>
@@ -280,19 +283,19 @@
         <!-- Image Card 2 -->
         <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
           <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(2)">
-            <img id="galleryImg2" src="" class="hidden w-full h-full object-cover rounded-lg" alt="Memory 2">
-            <div id="galleryPlaceholder2" class="text-center p-4">
+            <img id="galleryImg2" src="IMG20260623204630.jpg" class="w-full h-full object-cover rounded-lg" alt="Memory 2" onerror="handleImageLoadError(2)">
+            <div id="galleryPlaceholder2" class="hidden text-center p-4 absolute inset-0 flex flex-col items-center justify-center bg-rose-50">
               <i class="fa-solid fa-heart text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
-              <p class="text-xs text-rose-500 font-semibold">Upload Photo 2</p>
-              <p class="text-[10px] text-stone-400 mt-1">(Your favorite picture of us together)</p>
+              <p class="text-xs text-rose-500 font-semibold">Image loading or needs upload...</p>
+              <p class="text-[9px] text-stone-400 mt-1 font-mono">Filename: IMG20260623204630.jpg</p>
             </div>
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
-              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Photo</span>
+              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Replacement</span>
             </div>
           </div>
           <input type="file" id="imageInput2" accept="image/*" class="hidden" onchange="handleImageFile(this, 2)">
           <div class="mt-3 text-center">
-            <p id="imageCap2" class="text-sm font-semibold text-stone-700 font-serif-elegant">Holding Hands & Hearts</p>
+            <p id="imageCap2" class="text-sm font-semibold text-stone-700 font-serif-elegant leading-snug">The picture in which jaaanuu is the cutest among the whole universe</p>
             <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
           </div>
         </div>
@@ -300,19 +303,19 @@
         <!-- Image Card 3 -->
         <div class="group relative bg-white p-4 rounded-xl shadow-md border border-rose-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
           <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-rose-200 cursor-pointer" onclick="triggerImageUpload(3)">
-            <img id="galleryImg3" src="" class="hidden w-full h-full object-cover rounded-lg" alt="Memory 3">
-            <div id="galleryPlaceholder3" class="text-center p-4">
+            <img id="galleryImg3" src="20260625 195743.heic" class="w-full h-full object-cover rounded-lg" alt="Memory 3" onerror="handleImageLoadError(3)">
+            <div id="galleryPlaceholder3" class="hidden text-center p-4 absolute inset-0 flex flex-col items-center justify-center bg-rose-50">
               <i class="fa-solid fa-wand-magic-sparkles text-4xl text-rose-300 mb-2 group-hover:scale-110 transition-transform"></i>
-              <p class="text-xs text-rose-500 font-semibold">Upload Photo 3</p>
-              <p class="text-[10px] text-stone-400 mt-1">(A cute selfie or a silly candid moment)</p>
+              <p class="text-xs text-rose-500 font-semibold">Image loading or needs upload...</p>
+              <p class="text-[9px] text-stone-400 mt-1 font-mono">Filename: 20260625 195743.heic</p>
             </div>
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
-              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Photo</span>
+              <span class="text-white text-xs bg-rose-600/90 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-up-from-bracket mr-1"></i> Upload Replacement</span>
             </div>
           </div>
           <input type="file" id="imageInput3" accept="image/*" class="hidden" onchange="handleImageFile(this, 3)">
           <div class="mt-3 text-center">
-            <p id="imageCap3" class="text-sm font-semibold text-stone-700 font-serif-elegant">Just Being Us</p>
+            <p id="imageCap3" class="text-sm font-semibold text-stone-700 font-serif-elegant leading-snug">Picture in which you placed your hand on my shoulderr🤒🥴</p>
             <p class="text-[10px] text-rose-400 font-mono mt-0.5">TAP TO CUSTOMIZE</p>
           </div>
         </div>
@@ -520,18 +523,20 @@
   <!-- SCRIPTS & APPLICATION LOGIC -->
   <script>
     // --- APP STATE & LOCALSTORAGE ---
-    // A database schema using local variables or localStorage for continuous browser editing sessions
+    // Persistent love state for continuing active editing sessions
     const state = {
       jaanuuName: localStorage.getItem('romantic_jaanuu') || 'Jaanuu',
       sattuuName: localStorage.getItem('romantic_sattuu') || 'Sattuu',
-      letterText: localStorage.getItem('romantic_letter') || `I am sitting here thinking about us, and I wanted to write you something that shows you how incredibly much you mean to me. You are my home, my anchor, and my happiest thought.
+      letterText: localStorage.getItem('romantic_letter') || `Hyyyyy Jaaanuuuu, I Love youuu idk amaa su lakhuuu ik khaali lavaraa j laikha hase and me english gujarati mix ma lakhaa yk khaali english ma bov serious laage.. alsoo me aa letter lakhvanoj hato pan tame pehla aapi didhoo and pachhi mane puichu k me kyare aapvanoo😭😭 jenathi have evu laagse k tame kidhu etle me laikhoo..
 
-Every single time you call me "Sattuu", my heart melts a little more. It’s my favorite sound in the entire world, and the prettiest way my name has ever been spoken. 
+Hmm so idk from where to startt i justt Love youu forever i could not express it in my words but still when i wake up the first thing i check on my phone is your messagess and lovely reels you could not even imagine how happyy i wass when you said I love youuu tooh for the first timeee that was my best moment for sureee i was sooo soooo sooooooo happyy that i would even do anything for youu ya but homework and assignments would still be so out of my league 😜😜 sorry jaanuu 
 
-I love you not only for who you are, but for who I am when I am with you. You make the world brighter, calmer, and infinitely more beautiful. This little page is a small canvas of my endless adoration for you.`,
-      cap1: localStorage.getItem('romantic_cap1') || 'The Day I Smiled Brightest',
-      cap2: localStorage.getItem('romantic_cap2') || 'Holding Hands & Hearts',
-      cap3: localStorage.getItem('romantic_cap3') || 'Just Being Us',
+And yess indeed me maanu k me tane joto tuition maa cuz i really liked you since thenn but when you started talkin to mee i kneww that ur the one tame mane literally change kari kaaidhoo ekdum ego valo maanas jee rude hato (sometimes still noww😭😭) and yaaaa i still smile when i remember that we use to do our who reaches first reel liking competition karta tee you were my greatest opponent aapde te haji bhi karvu joye actuallyy that would be funn and nostalgicc
+
+Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni baar jatuj rayeluu che 😂🤣 bijo focus ama graphics ma aapuuu okk jaaanuuu i love youuu khajuriii tamari sugandh mara ma felavya karjoo💓💕`,
+      cap1: localStorage.getItem('romantic_cap1') || 'Our first picture togetherr',
+      cap2: localStorage.getItem('romantic_cap2') || 'The picture in which jaaanuu is the cutest among the whole universe',
+      cap3: localStorage.getItem('romantic_cap3') || 'Picture in which you placed your hand on my shoulderr🤒🥴',
       timeDate1: localStorage.getItem('romantic_tdate1') || 'The Beautiful Beginning',
       timeTitle1: localStorage.getItem('romantic_ttitle1') || 'Our Eyes Met & The World Paused',
       timeDesc1: localStorage.getItem('romantic_tdesc1') || 'The magical day when fate aligned and we finally got to talk. Little did I know that day, my whole universe was about to change for the better.',
@@ -541,9 +546,9 @@ I love you not only for who you are, but for who I am when I am with you. You ma
       timeDate3: localStorage.getItem('romantic_tdate3') || 'Today & Forever',
       timeTitle3: localStorage.getItem('romantic_ttitle3') || 'Loving You More Every Single Day',
       timeDesc3: localStorage.getItem('romantic_tdesc3') || 'Every sunrise brings new reasons to fall deeper in love with you. No matter where life takes us, I promise to always keep you safe and smiling in my heart.',
-      imgData1: localStorage.getItem('romantic_img1') || '',
-      imgData2: localStorage.getItem('romantic_img2') || '',
-      imgData3: localStorage.getItem('romantic_img3') || '',
+      imgData1: localStorage.getItem('romantic_img1') || '20260620_205705(1).heic',
+      imgData2: localStorage.getItem('romantic_img2') || 'IMG20260623204630.jpg',
+      imgData3: localStorage.getItem('romantic_img3') || '20260625 195743.heic',
     };
 
     // Compliments Array for Love Jar
@@ -573,13 +578,28 @@ I love you not only for who you are, but for who I am when I am with you. You ma
       "Sattuu loves Jaanuu to absolute infinity! 💖"
     ];
 
+    // Fallback handler if image cannot be loaded from filesystem (e.g. while testing locally)
+    function handleImageLoadError(index) {
+      const imgEl = document.getElementById(`galleryImg${i = index}`);
+      const placeholderEl = document.getElementById(`galleryPlaceholder${index}`);
+      
+      // If we are using the default filenames and they fail to load, display the placeholder elegantly.
+      if (state[`imgData${index}`] === '20260620_205705(1).heic' || 
+          state[`imgData${index}`] === 'IMG20260623204630.jpg' || 
+          state[`imgData${index}`] === '20260625 195743.heic' || 
+          !state[`imgData${index}`]) {
+        imgEl.classList.add('hidden');
+        placeholderEl.classList.remove('hidden');
+      }
+    }
+
     // --- RENDER CURRENT STATE TO DOM ---
     function renderState() {
       // Headers
       document.getElementById('heroRomanticHeader').innerText = `To My Dearest ${state.jaanuuName}`;
       document.getElementById('signatureName').innerText = `Your ${state.sattuuName}`;
       
-      // Letter
+      // Letter Body
       document.getElementById('loveLetterBody').innerText = state.letterText;
 
       // Photo Gallery Image Sources
@@ -639,7 +659,7 @@ I love you not only for who you are, but for who I am when I am with you. You ma
           state[`imgData${index}`] = base64Data;
           localStorage.setItem(`romantic_img${index}`, base64Data);
           renderState();
-          showToast("Photo added beautifully! 📸");
+          showToast("Photo updated elegantly! 📸");
         };
         reader.readAsDataURL(file);
       }
@@ -702,38 +722,9 @@ I love you not only for who you are, but for who I am when I am with you. You ma
 
     // --- HTML EXPORTER FUNCTIONALITY ---
     exportHtmlBtn.addEventListener('click', () => {
-      // Creating a beautiful package of this entire customized app!
+      // Create a persistent self-contained package of the letter
       const currentHTML = document.documentElement.outerHTML;
       
-      // Replace state initialization so it defaults to the edited values upon loading
-      let packageScript = `
-    const state = {
-      jaanuuName: ${JSON.stringify(state.jaanuuName)},
-      sattuuName: ${JSON.stringify(state.sattuuName)},
-      letterText: ${JSON.stringify(state.letterText)},
-      cap1: ${JSON.stringify(state.cap1)},
-      cap2: ${JSON.stringify(state.cap2)},
-      cap3: ${JSON.stringify(state.cap3)},
-      timeDate1: ${JSON.stringify(state.timeDate1)},
-      timeTitle1: ${JSON.stringify(state.timeTitle1)},
-      timeDesc1: ${JSON.stringify(state.timeDesc1)},
-      timeDate2: ${JSON.stringify(state.timeDate2)},
-      timeTitle2: ${JSON.stringify(state.timeTitle2)},
-      timeDesc2: ${JSON.stringify(state.timeDesc2)},
-      timeDate3: ${JSON.stringify(state.timeDate3)},
-      timeTitle3: ${JSON.stringify(state.timeTitle3)},
-      timeDesc3: ${JSON.stringify(state.timeDesc3)},
-      imgData1: ${JSON.stringify(state.imgData1)},
-      imgData2: ${JSON.stringify(state.imgData2)},
-      imgData3: ${JSON.stringify(state.imgData3)},
-    };
-      `;
-
-      // Match state initialization line from HTML and replace it to secure customization hardcoded
-      let editedHTML = currentHTML;
-      const originalStateRegex = /const\s+state\s*=\s*\{[\s\S]*?\};\s*\/\/ --- APP STATE & LOCALSTORAGE ---/g;
-      
-      // Make sure we include a clean setup to read this bundled data
       const bundledStateInject = `const state = {
       jaanuuName: ${JSON.stringify(state.jaanuuName)},
       sattuuName: ${JSON.stringify(state.sattuuName)},
@@ -755,10 +746,9 @@ I love you not only for who you are, but for who I am when I am with you. You ma
       imgData3: ${JSON.stringify(state.imgData3)},
     };`;
 
-      // Safely replace state assignment to lock-in values inside output code
-      editedHTML = editedHTML.replace(/const\s+state\s*=\s*\{[\s\S]*?imgData3:\s*localStorage\.getItem\('romantic_img3'\)\s*\|\|\s*''\s*,\s*\};/g, bundledStateInject);
+      // Swap out template state logic with actual bundled details
+      let editedHTML = currentHTML.replace(/const\s+state\s*=\s*\{[\s\S]*?imgData3:\s*localStorage\.getItem\('romantic_img3'\)\s*\|\|\s*''\s*,\s*\};/g, bundledStateInject);
 
-      // Trigger standard file download in browser
       const blob = new Blob([editedHTML], { type: 'text/html' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
@@ -793,19 +783,15 @@ I love you not only for who you are, but for who I am when I am with you. You ma
     const mainContent = document.getElementById('mainContent');
 
     openEnvelopeBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // Stop bubble so we don't double click
+      e.stopPropagation(); 
       
-      // Trigger sounds
-      startSweetSynthLoop();
+      // Play the song (Ok Jaanu) and tap sounds
+      togglePlaySong(true);
       playSparkleSound();
 
-      // Open animations
       mainEnvelope.classList.add('open');
-      
-      // Visual shower of hearts
       triggerHeartExplosion();
 
-      // Fade out intro, slide and reveal actual loveletter
       setTimeout(() => {
         introScreen.classList.add('translate-y-[-120%]', 'opacity-0');
         mainContent.classList.remove('pointer-events-none');
@@ -822,7 +808,6 @@ I love you not only for who you are, but for who I am when I am with you. You ma
     const complimentText = document.getElementById('complimentText');
 
     jarButton.addEventListener('click', () => {
-      // Pick random reason
       const randomIndex = Math.floor(Math.random() * romanticCompliments.length);
       const randomNote = romanticCompliments[randomIndex];
       
@@ -835,13 +820,11 @@ I love you not only for who you are, but for who I am when I am with you. You ma
         complimentText.classList.add('scale-100', 'opacity-100');
       }, 200);
 
-      // Create little hearts burst above jar
       for(let i=0; i<4; i++) {
         createFloatingHeartFromElement(jarButton);
       }
     });
 
-    // Helper to burst tiny hearts above an element (like the jar)
     function createFloatingHeartFromElement(elem) {
       const rect = elem.getBoundingClientRect();
       const heart = document.createElement('div');
@@ -868,7 +851,6 @@ I love you not only for who you are, but for who I am when I am with you. You ma
       
       meterMessage.innerText = `"${selectedMessage}"`;
       
-      // Calculate cute mathematical representation of infinite love
       if (value === 10) {
         meterPercent.innerText = "Loving Capacity: ∞% (Break the Physics!)";
       } else {
@@ -878,139 +860,93 @@ I love you not only for who you are, but for who I am when I am with you. You ma
     });
 
 
-    // --- MUSIC & AMBIENT AUDIO SYNTH (Web Audio API) ---
-    let audioCtx = null;
-    let synthLoopInterval = null;
-    let isPlayingMusic = false;
+    // --- HTML5 MP3 INTEGRATION FOR 'OK JAANU TITLE TRACK' ---
+    const bgMusic = document.getElementById('bgMusic');
     const musicToggle = document.getElementById('musicToggle');
     const musicStatus = document.getElementById('musicStatus');
+    let isPlayingMusic = false;
 
+    // Beautiful playback control
+    function togglePlaySong(forcePlay = null) {
+      const shouldPlay = forcePlay !== null ? forcePlay : !isPlayingMusic;
+
+      if (shouldPlay) {
+        bgMusic.play().then(() => {
+          isPlayingMusic = true;
+          musicStatus.innerText = "Playing Ok Jaanu";
+          musicToggle.innerHTML = '<i class="fa-solid fa-volume-high animate-bounce"></i>';
+        }).catch((err) => {
+          console.log("Audio waiting for user interaction/file.", err);
+          // If the local MP3 file is missing, inform the user with a friendly helper
+          showToast("Please place 'ok_jaanu_title_track.mp3' in the folder to play! 🎵");
+        });
+      } else {
+        bgMusic.pause();
+        isPlayingMusic = false;
+        musicStatus.innerText = "Song Muted";
+        musicToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+      }
+    }
+
+    musicToggle.addEventListener('click', () => togglePlaySong());
+
+
+    // --- ADVANCED WEB AUDIO API FOR TAP UX SOUND EFFECTS ---
+    let audioCtx = null;
     function initAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
     }
 
-    // Play a single soft romantic bell tone
     function playBell(noteFreq, duration, volume) {
-      initAudio();
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-      
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      const filter = audioCtx.createBiquadFilter();
-
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      // Low pass filter to make it cozy, warm, and sweet
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(800, audioCtx.currentTime);
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(noteFreq, audioCtx.currentTime);
-
-      // Envelope to soften gain strike
-      gain.gain.setValueAtTime(0, audioCtx.currentTime);
-      gain.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + 0.1);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    }
-
-    // Beautiful loop of warm romantic chords
-    // C Major 7 -> A Minor 7 -> F Major 7 -> G Major
-    const romanceChords = [
-      [261.63, 329.63, 392.00, 493.88], // Cmaj7 (C4, E4, G4, B4)
-      [220.00, 261.63, 329.63, 392.00], // Am7   (A3, C4, E4, G4)
-      [174.61, 220.00, 261.63, 329.63], // Fmaj7 (F3, A3, C4, E4)
-      [196.00, 246.94, 293.66, 392.00]  // G7    (G3, B3, D4, G4)
-    ];
-
-    let chordIdx = 0;
-    function startSweetSynthLoop() {
-      initAudio();
-      if (isPlayingMusic) return;
-      isPlayingMusic = true;
-      musicStatus.innerText = "Playing Soft Melody";
-      musicToggle.innerHTML = '<i class="fa-solid fa-volume-high animate-bounce"></i>';
-
-      // Start looping melody tones
-      let noteStep = 0;
-      synthLoopInterval = setInterval(() => {
-        const chord = romanceChords[chordIdx];
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         
-        // Pick a base note and dynamic arpeggios
-        if (noteStep % 4 === 0) {
-          // Play full soft block chord base
-          chord.forEach(freq => playBell(freq, 4.0, 0.05));
-        } else {
-          // Play a sweet single bell note for arpeggio
-          const noteFreq = chord[Math.floor(Math.random() * chord.length)] * 2; // Octave up
-          playBell(noteFreq, 2.0, 0.04);
-        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
 
-        noteStep++;
-        if (noteStep >= 16) {
-          noteStep = 0;
-          chordIdx = (chordIdx + 1) % romanceChords.length;
-        }
-      }, 600);
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        // Warm, cozy filter for sweet feedback tones
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(800, audioCtx.currentTime);
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(noteFreq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) { console.log("Sound effect couldn't play: ", e); }
     }
 
-    function stopSweetSynthLoop() {
-      if (synthLoopInterval) {
-        clearInterval(synthLoopInterval);
-      }
-      isPlayingMusic = false;
-      musicStatus.innerText = "Music Muted";
-      musicToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-    }
-
-    musicToggle.addEventListener('click', () => {
-      if (isPlayingMusic) {
-        stopSweetSynthLoop();
-      } else {
-        startSweetSynthLoop();
-      }
-    });
-
-    // Sound effect: Opening Envelope
     function playSparkleSound() {
-      initAudio();
-      const now = audioCtx.currentTime;
       [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
-        setTimeout(() => {
-          playBell(freq, 1.2, 0.07);
-        }, idx * 100);
+        setTimeout(() => playBell(freq, 1.2, 0.07), idx * 100);
       });
     }
 
-    // Sound effect: Sweet bubble tap
     function playCuteBubbleSound() {
-      initAudio();
       playBell(880, 0.4, 0.08);
       setTimeout(() => playBell(1109, 0.5, 0.06), 80);
     }
 
-    // Sound effect: Pitch shift tone for Love Slider
     function playPitchShiftBeep(index) {
-      initAudio();
-      // Calculate a sweet progressive note frequency based on scale 1 to 10
-      const startFreq = 220; 
-      const freqStep = 80;
-      playBell(startFreq + (index * freqStep), 0.3, 0.04);
+      playBell(220 + (index * 80), 0.3, 0.04);
     }
 
 
     // --- FLOATING HEARTS CANVAS BACKGROUND ---
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
-    
     let hearts = [];
 
     function resizeCanvas() {
@@ -1023,7 +959,7 @@ I love you not only for who you are, but for who I am when I am with you. You ma
     class BackgroundHeart {
       constructor() {
         this.reset();
-        this.y = Math.random() * canvas.height; // start randomized
+        this.y = Math.random() * canvas.height;
       }
 
       reset() {
@@ -1038,7 +974,6 @@ I love you not only for who you are, but for who I am when I am with you. You ma
       update() {
         this.y -= this.speedY;
         this.x += this.speedX;
-        
         if (this.y < -20 || this.x < -20 || this.x > canvas.width + 20) {
           this.reset();
         }
@@ -1049,48 +984,37 @@ I love you not only for who you are, but for who I am when I am with you. You ma
         ctx.globalAlpha = this.opacity;
         ctx.fillStyle = '#f43f5e';
         ctx.beginPath();
-        
-        // Draw Heart Path on Canvas
         const topY = this.y - this.size / 2;
         ctx.moveTo(this.x, this.y);
         ctx.bezierCurveTo(this.x - this.size / 2, topY, this.x - this.size, this.y - this.size / 3, this.x, this.y + this.size * 0.8);
         ctx.bezierCurveTo(this.x + this.size, this.y - this.size / 3, this.x + this.size / 2, topY, this.x, this.y);
-        
         ctx.fill();
         ctx.restore();
       }
     }
 
-    // Create background hearts
     for (let i = 0; i < 25; i++) {
       hearts.push(new BackgroundHeart());
     }
 
     function animateHearts() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Update and Draw Background Hearts
       hearts.forEach(heart => {
         heart.update();
         heart.draw();
       });
-
       requestAnimationFrame(animateHearts);
     }
     animateHearts();
 
-    // Trigger explosive heart-particles when letter is opened
     function triggerHeartExplosion() {
       for (let i = 0; i < 30; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart-particle text-rose-500 text-2xl';
         heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
-        
-        // Start from center
         heart.style.left = `${window.innerWidth / 2}px`;
         heart.style.top = `${window.innerHeight / 2}px`;
         
-        // Random drift/delay durations
         const delay = Math.random() * 0.5;
         const duration = Math.random() * 3 + 2;
         const size = Math.random() * 1.5 + 0.5;
@@ -1099,25 +1023,17 @@ I love you not only for who you are, but for who I am when I am with you. You ma
         heart.style.animationDelay = `${delay}s`;
         heart.style.transform = `scale(${size})`;
         
-        // Add random horizontal shift through custom property
         const drift = Math.random() * 400 - 200;
         heart.style.marginLeft = `${drift}px`;
 
         document.body.appendChild(heart);
-
-        // Remove elements clean
-        setTimeout(() => {
-          heart.remove();
-        }, (duration + delay) * 1000);
+        setTimeout(() => heart.remove(), (duration + delay) * 1000);
       }
     }
 
-
     // --- APP STARTUP & PRE-FLIGHT ---
     window.onload = function() {
-      // Prevent scrolling until opened
       document.body.style.overflowY = 'hidden';
-      // Load current state (defaults or edited cached ones)
       renderState();
     }
   </script>
