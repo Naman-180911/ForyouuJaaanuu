@@ -12,6 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- HEIC Image Decoder Library for Browsers -->
+  <script src="https://jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
   
   <style>
     body {
@@ -118,6 +120,20 @@
     .wax-seal {
       animation: pulseGold 2s infinite ease-in-out;
     }
+    
+    /* Loading Spinner Styling */
+    .loader-spin {
+      border: 3px solid #ffe3e6;
+      border-top: 3px solid #f43f5e;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body class="min-h-screen text-slate-800 flex flex-col items-center">
@@ -213,10 +229,15 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
       <!-- Grid Layout -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         
-        <!-- Image Card 1 -->
+        <!-- Image Card 1 (HEIC file) -->
         <div class="bg-white p-4 rounded-xl shadow-md border border-rose-100 transition-all duration-300">
           <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
-            <img id="galleryImg1" src="20260620_205705(1).heic" class="w-full h-full object-cover rounded-lg" alt="Memory 1" onerror="handleImageLoadError(1)">
+            <!-- Loader active while JavaScript converts the HEIC content dynamically -->
+            <div id="loader1" class="absolute inset-0 flex flex-col items-center justify-center bg-rose-50/90 z-20">
+              <div class="loader-spin mb-2"></div>
+              <p class="text-[10px] text-rose-400 font-medium">Processing picture...</p>
+            </div>
+            <img id="galleryImg1" data-heic="20260620_205705(1).heic" class="w-full h-full object-cover rounded-lg hidden" alt="Memory 1">
             <div id="galleryPlaceholder1" class="hidden text-center p-4 absolute inset-0 flex flex-col items-center justify-center bg-rose-50">
               <i class="fa-solid fa-camera-retro text-4xl text-rose-300 mb-2"></i>
               <p class="text-xs text-rose-500 font-semibold">Image loading or file missing...</p>
@@ -228,7 +249,7 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
           </div>
         </div>
 
-        <!-- Image Card 2 -->
+        <!-- Image Card 2 (Standard JPG file) -->
         <div class="bg-white p-4 rounded-xl shadow-md border border-rose-100 transition-all duration-300">
           <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
             <img id="galleryImg2" src="IMG20260623204630.jpg" class="w-full h-full object-cover rounded-lg" alt="Memory 2" onerror="handleImageLoadError(2)">
@@ -243,10 +264,14 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
           </div>
         </div>
 
-        <!-- Image Card 3 -->
+        <!-- Image Card 3 (HEIC file) -->
         <div class="bg-white p-4 rounded-xl shadow-md border border-rose-100 transition-all duration-300">
           <div class="relative w-full h-64 bg-rose-50 rounded-lg overflow-hidden flex flex-col items-center justify-center">
-            <img id="galleryImg3" src="20260625_195743.heic" class="w-full h-full object-cover rounded-lg" alt="Memory 3" onerror="handleImageLoadError(3)">
+            <div id="loader3" class="absolute inset-0 flex flex-col items-center justify-center bg-rose-50/90 z-20">
+              <div class="loader-spin mb-2"></div>
+              <p class="text-[10px] text-rose-400 font-medium">Processing picture...</p>
+            </div>
+            <img id="galleryImg3" data-heic="20260625_195743.heic" class="w-full h-full object-cover rounded-lg hidden" alt="Memory 3">
             <div id="galleryPlaceholder3" class="hidden text-center p-4 absolute inset-0 flex flex-col items-center justify-center bg-rose-50">
               <i class="fa-solid fa-wand-magic-sparkles text-4xl text-rose-300 mb-2"></i>
               <p class="text-xs text-rose-500 font-semibold">Image loading or file missing...</p>
@@ -270,10 +295,44 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
   </main>
 
   <script>
-    // Placeholder image trigger if files are not detected yet locally or on repository
+    // Traditional fallback framework for JPG
     function handleImageLoadError(index) {
       document.getElementById(`galleryImg${index}`).classList.add('hidden');
       document.getElementById(`galleryPlaceholder${index}`).classList.remove('hidden');
+    }
+
+    // --- HEIC IMAGE CONVERSION RUNTIME ---
+    async function loadHeicImage(imgId, loaderId, placeholderId) {
+      const imgElement = document.getElementById(imgId);
+      const loaderElement = document.getElementById(loaderId);
+      const placeholderElement = document.getElementById(placeholderId);
+      const filePath = imgElement.getAttribute('data-heic');
+
+      try {
+        // Fetch the file binary blob out of your repository path
+        const response = await fetch(filePath);
+        if (!response.ok) throw new Error("File not found");
+        const blob = await response.blob();
+
+        // Convert the raw HEIC blob to readable JPEG inside the client window browser memory
+        const convertedBlob = await heic2any({
+          blob: blob,
+          toType: "image/jpeg",
+          quality: 0.8
+        });
+
+        // Set the transient conversion URL as source target
+        const imgUrl = URL.createObjectURL(convertedBlob);
+        imgElement.src = imgUrl;
+        
+        // Render content swap smoothly
+        loaderElement.classList.add('hidden');
+        imgElement.classList.remove('hidden');
+      } catch (error) {
+        console.error("HEIC parsing error for " + filePath + ":", error);
+        loaderElement.classList.add('hidden');
+        placeholderElement.classList.remove('hidden');
+      }
     }
 
     // --- ENVELOPE REVEAL MECHANISM ---
@@ -288,6 +347,10 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
 
       mainEnvelope.classList.add('open');
       triggerHeartExplosion();
+
+      // Trigger background dynamic decompression as soon as envelope breaks open
+      loadHeicImage('galleryImg1', 'loader1', 'galleryPlaceholder1');
+      loadHeicImage('galleryImg3', 'loader3', 'galleryPlaceholder3');
 
       setTimeout(() => {
         introScreen.classList.add('translate-y-[-120%]', 'opacity-0');
@@ -368,6 +431,7 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
 
     for (let i = 0; i < 25; i++) hearts.push(new BackgroundHeart());
 
+    // Animation frames loops
     function animateHearts() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       hearts.forEach(h => { h.update(); h.draw(); });
@@ -398,3 +462,4 @@ Ana thi vadhare su lakhvu tema mane samaj nathi padtii aa already maari limit ni
   </script>
 </body>
 </html>
+
